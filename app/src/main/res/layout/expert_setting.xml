@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardBackgroundColor="@color/Milk_White"
+    tools:context=".ExpertSetting">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        >
+        <include
+            layout="@layout/toolbar2"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="70dp"
+                    android:gravity="left|center"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:drawableRight="@drawable/update_profile_icon"
+                    android:text="@string/update_profile"
+
+                    android:id="@+id/update_expert"
+                    >
+                </TextView>
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@color/Blue_Angel"
+                    android:layout_height="2dip">
+
+                </View>
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="70dp"
+                    android:gravity="left|center"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:drawableRight="@drawable/signout_icon"
+                    android:id="@+id/expert_signout"
+                    android:text="@string/sign_out"
+
+                    >
+
+                </TextView>
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@color/Blue_Angel"
+                    android:layout_height="2dip">
+
+                </View>
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="70dp"
+                    android:gravity="left|center"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:drawableRight="@drawable/delete_icon"
+                    android:text="@string/delete_account"
+                    android:id="@+id/expert_delete"
+                    >
+
+                </TextView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@color/Blue_Angel"
+                    android:layout_height="2dip">
+
+                </View>
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="70dp"
+                    android:gravity="left|center"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:drawableRight="@drawable/contact_icon"
+                    android:text="@string/about_us"
+                    android:id="@+id/expert_about"
+                    >
+
+                </TextView>
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

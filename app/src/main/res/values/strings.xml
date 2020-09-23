@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">AgriSol</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="about_us">About Us</string>
+    <string name="profile">Profile</string>
+    <string name="full_name">Full Name:</string>
+    <string name="username">Username:</string>
+    <string name="email_address">Email Address:</string>
+    <string name="mobile_number">Mobile Number:</string>
+    <string name="occupation">Occupation</string>
+    <string name="city">City:</string>
+    <string name="province_state">Province/State:</string>
+    <string name="country">Country:</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="signup">Signup</string>
+    <string name="user_or_expert">User or Expert</string>
+    <string name="user">User</string>
+    <string name="expert">Expert</string>
+    <string name="login">Login</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="do_not_have_account_to_create_new_account">Do Not Have Account To Create New Account</string>
+    <string name="email_address__">Email Address</string>
+    <string name="fulname">Full Name</string>
+    <string name="mobile_number_">Mobile Number</string>
+    <string name="academic_titile">Academic Titile</string>
+    <string name="degree">Degree</string>
+    <string name="education">Education</string>
+    <string name="university">University</string>
+    <string name="city_">City</string>
+    <string name="province_state_">Province/State</string>
+    <string name="country_">Country</string>
+    <string name="register">Register</string>
+    <string name="expertise">Expertise</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="qualification">Qualification</string>
+    <string name="address">Address</string>
+    <string name="space">,</string>
+    <string name="name">Name</string>
+    <string name="update">Update</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

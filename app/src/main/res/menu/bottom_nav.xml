@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:aap="http://schemas.android.com/tools"
+    >
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/nav_home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navigation_expert"
+        android:icon="@drawable/nav_experts"
+        android:title="Experts" />
+
+
+    <item
+        android:id="@+id/navigation_market"
+        android:icon="@drawable/nav_market"
+        android:title="Market Rate" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/nav_profile"
+        android:title="Profile" />
+
+
+
+
+</menu>

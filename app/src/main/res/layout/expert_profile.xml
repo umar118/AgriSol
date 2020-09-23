@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ExpertProfile">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="top|center"
+            >
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@drawable/plants"
+                >
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/expertProfileView"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/profile"
+                    app:civ_border_color="@color/colorPrimaryDark"
+                    app:civ_border_width="2dp"
+                    android:layout_marginBottom="5dp"
+                    android:paddingTop="@dimen/nav_header_vertical_spacing"
+                    >
+
+                </de.hdodenhof.circleimageview.CircleImageView>
+
+            </LinearLayout>
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:text="@string/full_name"/>
+                    <TextView
+                        android:id="@+id/text_expert_fullname"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/border"
+                        android:layout_gravity="start|center"
+                        android:gravity="start|center"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:text="@string/email_address"/>
+                    <TextView
+                        android:id="@+id/text_email_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/border"
+                        android:layout_gravity="start|center"
+                        android:gravity="start|center"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:text="@string/mobile_number"/>
+                    <TextView
+                        android:id="@+id/text_expert_rmobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/border"
+                        android:layout_gravity="start|center"
+                        android:gravity="start|center"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:text="@string/qualification"/>
+                    <TextView
+                        android:id="@+id/text_expert_quali"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/border"
+                        android:layout_gravity="start|center"
+                        android:gravity="start|center"
+
+                        />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:text="@string/city"/>
+                    <TextView
+                        android:id="@+id/text_expert_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/border"
+                        android:layout_gravity="start|center"
+                        android:gravity="start|center"
+
+                        />
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:text="@string/province_state"/>
+                    <TextView
+                        android:id="@+id/text_expert_province"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/border"
+                        android:layout_gravity="start|center"
+                        android:gravity="start|center"
+
+                        />
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:text="@string/expertise"/>
+                    <TextView
+                        android:id="@+id/text_expert_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/border"
+                        android:layout_gravity="start|center"
+                        android:gravity="start|center"
+
+                        />
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:text="@string/country"/>
+                    <TextView
+                        android:id="@+id/text_experties"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/border"
+                        android:layout_gravity="start|center"
+                        android:gravity="start|center"
+
+                        />
+
+                </LinearLayout>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/updateFloatExpert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/update"
+                    app:maxImageSize="30dp"
+                    app:backgroundTint="@color/White"
+                    app:layout_behavior="com.codepath.floatingactionbuttontest.ScrollAwareFABBehavior"
+                    app:layout_anchorGravity="bottom|right|end" />
+            </FrameLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

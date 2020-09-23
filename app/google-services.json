@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "391716843843",
+    "firebase_url": "https://agrisolution-e8d21.firebaseio.com",
+    "project_id": "agrisolution-e8d21",
+    "storage_bucket": "agrisolution-e8d21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391716843843:android:99d9835148d73cf738bff6",
+        "android_client_info": {
+          "package_name": "com.example.agrisol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "391716843843-q4heoi0dpedpn2r2b2h80oq2f8gus6qu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.agrisol",
+            "certificate_hash": "87747cc595863dee0e321112260e5101c5b204a4"
+          }
+        },
+        {
+          "client_id": "391716843843-alk42vlarfv6kv9528prq03mnabph6hm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFKGYg7soEtU5UpIgVFKZJAg9jBQiAciU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "391716843843-alk42vlarfv6kv9528prq03mnabph6hm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
