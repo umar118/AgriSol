@@ -54,5 +54,8 @@ dependencies {
 
     implementation 'com.google.mlkit:image-labeling-custom:16.2.1'
 
+    implementation 'com.google.firebase:firebase-inappmessaging-display:19.1.1'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+
 
 }

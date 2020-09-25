@@ -43,4 +43,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="crop_s_name">Crop\'s Name</string>
+    <string name="crop_s_price">Crop\'s Price</string>
+    <string name="district">District</string>
+    <string name="admin_login">Admin Login</string>
 </resources>

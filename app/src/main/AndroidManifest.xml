@@ -17,7 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UpdateExpertProfile"></activity>
+        <activity android:name=".CreateAdminAccount"></activity>
+        <activity android:name=".AdminLogin" />
+        <activity android:name=".AddMarketList" />
+        <activity android:name=".UpdateExpertProfile" />
         <activity android:name=".ExpertSetting" />
         <activity android:name=".UpdateUserProfile" />
         <activity android:name=".CreateExpertAccount" />

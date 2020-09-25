@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -45,12 +46,22 @@ public class Login extends AppCompatActivity {
     public static final String MY_PREFS_NAME = "MyPrefsFile";
     TextView forgetPassword;
     private AlertDialog alertDialog;
+    private ImageView adminLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
 
+        adminLogin=findViewById(R.id.admin);
+        adminLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),AdminLogin.class));
+                finish();
+            }
+        });
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -68,15 +79,13 @@ public class Login extends AppCompatActivity {
                     startActivity(new Intent(Login.this, UserDashboard.class));
                     finish();
                 }
-
-
-
-
-
-        { if (mAuth.getCurrentUser() != null) {
+            else    if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(Login.this, ExpertDashboard.class));
             finish();
-        }}
+        }
+            else {Toast.makeText(this,"",Toast.LENGTH_SHORT).show();}
+
+
         final SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         firebaseAuthlistner = new FirebaseAuth.AuthStateListener() {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
