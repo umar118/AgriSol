@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CreateAdminAccount">
+
+
+    <include
+        layout="@layout/toolbar2"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_curve_login"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/logo"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center"
+
+            />
+        <com.google.android.material.textfield.TextInputLayout
+            app:errorEnabled="true"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/fulname"
+            android:layout_gravity="center"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/Green_Apple"
+            android:outlineProvider="paddedBounds"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Edit_AdminName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            app:errorEnabled="true"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/mobile_number_"
+            android:layout_gravity="center"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/Green_Apple"
+            android:outlineProvider="paddedBounds"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Edit_AdminMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            app:boxStrokeColor="@color/Green_Apple"
+            app:hintAnimationEnabled="true"
+            app:errorEnabled="true"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Email"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Edit_AdminEmail"
+                android:layout_width="300dp"
+                android:inputType="textEmailAddress"
+                android:layout_height="wrap_content"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            app:errorEnabled="true"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+
+            android:layout_gravity="center"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/Green_Apple"
+            app:passwordToggleEnabled="true"
+            android:outlineProvider="paddedBounds"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Edit_AdminPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/Edit_ExpertAdd"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button"
+            android:textColor="@color/White"
+            android:text="Admin Singup"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>
