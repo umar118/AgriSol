@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_margin="3dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/View_ExpertProfile"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            >
+        </de.hdodenhof.circleimageview.CircleImageView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                >
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name"
+                    android:textStyle="bold"
+                    android:layout_gravity="start|center"
+                    android:textSize="17sp"
+                    />
+
+                <TextView
+                    android:id="@+id/View_fullname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_gravity="start|center"
+                    />
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email_address__"
+                    android:layout_gravity="start|center"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    />
+
+                <TextView
+                    android:id="@+id/View_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_gravity="start|center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="left|center"
+                android:gravity="left|center"
+                android:layout_weight="1"
+                >
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mobile_number_"
+                    android:textStyle="bold"
+                    android:layout_gravity="start|center"
+                    android:textSize="17sp"
+                    />
+                <TextView
+                    android:id="@+id/View_mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_gravity="start|center"
+                    />
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/qualification"
+                    android:layout_gravity="start|center"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    />
+                <TextView
+                    android:id="@+id/View_qualification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_gravity="start|center"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textSize="17sp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+            <TextView
+                android:id="@+id/View_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:text=","
+                />
+            <TextView
+                android:id="@+id/View_pro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:text=","
+                />
+            <TextView
+                android:id="@+id/View_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/expertise"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textSize="17sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+            <TextView
+                android:id="@+id/View_expertise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="17sp"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/Green_Apple"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/edit_expert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:drawableLeft="@drawable/edit_icon"
+                android:text="Edit"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+
+                />
+            <Button
+                android:id="@+id/expert_delete"
+                android:background="@drawable/border"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/delete_icon"
+                android:text="Delete"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

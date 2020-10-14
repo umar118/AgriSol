@@ -9,15 +9,6 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     >
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/logo_app"
-        android:id="@+id/toolbar_profile"
-        android:layout_marginRight="10dp"
-        >
-    </de.hdodenhof.circleimageview.CircleImageView>
-
     <TextView
         android:gravity="center"
         android:layout_width="wrap_content"
@@ -25,8 +16,19 @@
         android:textColor="@color/White"
         android:id="@+id/toolbar_title"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:textSize="22sp"
         android:textStyle="bold"
         />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/logo_app"
+        android:id="@+id/toolbar_profile"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="100dp"
+        >
+    </de.hdodenhof.circleimageview.CircleImageView>
+
 
 </androidx.appcompat.widget.Toolbar>

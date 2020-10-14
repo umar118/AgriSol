@@ -38,7 +38,7 @@
     <string name="qualification">Qualification</string>
     <string name="address">Address</string>
     <string name="space">,</string>
-    <string name="name">Name</string>
+
     <string name="update">Update</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -47,4 +47,22 @@
     <string name="crop_s_price">Crop\'s Price</string>
     <string name="district">District</string>
     <string name="admin_login">Admin Login</string>
+    <string name="name">Name</string>
+
+
+    <string name="open">Drawer Open</string>
+    <string name="close">Drawer Close</string>
+    <string name="home">Home</string>
+    <string name="add_expert">Add Expert</string>
+    <string name="upddate_expert">Upddate Expert</string>
+    <string name="share">Share</string>
+    <string name="add_market_list">Add Market List</string>
+    <string name="update_market_list">Update Market list</string>
+    <string name="exit">Exit</string>
+    <string name="set">Setting</string>
+    <string name="date">Date</string>
+    <string name="add_item">Add Item</string>
+    <string name="ss">|</string>
+    <string name="delete">Delete</string>
+    <string name="s">:</string>
 </resources>

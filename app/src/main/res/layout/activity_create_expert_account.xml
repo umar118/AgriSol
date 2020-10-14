@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/Green_Apple"
     android:layout_gravity="center"
-    tools:context=".CreateExpertAccount">
+    tools:context=".Expert.CreateExpertAccount">
 
     <include
         android:layout_gravity="center"

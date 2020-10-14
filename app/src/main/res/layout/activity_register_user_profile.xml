@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/Green_Apple"
     android:orientation="vertical"
-    tools:context=".RegisterUserProfile">
+    tools:context=".User.RegisterUserProfile">
 
     <include layout="@layout/toolbar2"
         android:layout_gravity="center"

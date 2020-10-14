@@ -1,24 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-        <item
-            android:id="@+id/app_bar_search"
-            android:icon="@drawable/ic_search_black_24dp"
-            android:title="Search"
-            app:actionViewClass="android.widget.SearchView" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+
+        <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_update"
+                    android:icon="@drawable/update_profile_icon"
+                    android:title="@string/update_profile" />
+        </group>
+
+        <item android:title="@string/sign_out">
+                <menu>
+                        <item
+                            android:id="@+id/nav_signout"
+                            android:icon="@drawable/signout_icon"
+                            android:title="@string/sign_out" />
+                        <item
+                            android:id="@+id/nav_delete"
+                            android:icon="@drawable/delete_icon"
+                            android:title="@string/delete_account" />
+                </menu>
         </item>
+
+
+        <item android:title="Communicate">
+                <menu>
+                        <item
+                            android:id="@+id/nav_share"
+                            android:icon="@drawable/nav_share"
+                            android:title="Share" />
+                        <item
+                            android:id="@+id/nav_send"
+                            android:icon="@drawable/ic_send_black_24dp"
+                            android:title="Send" />
+                </menu>
+        </item>
+
         <item
             android:title="Setting"
-            android:id="@+id/menu_Setting">
+            android:id="@+id/menu_Setting"
+            android:icon="@drawable/nav_setting"
+            >
 
         </item>
         <item
             android:title="About us"
-            android:id="@+id/menu_about_us">
+            android:id="@+id/menu_about_us"
+            android:icon="@drawable/nav_notifications"
+            >
 
         </item>
-
-
-
-
 </menu>

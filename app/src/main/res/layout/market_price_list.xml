@@ -3,59 +3,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MarketPriceList">
+    android:background="@color/Green_Apple"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Market.MarketPriceList">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        >
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="3dp"
-        >
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            >
-
-            <TextView android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:text="@string/crop_s_name"/>
-            <TextView android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:text="@string/crop_s_price"/>
-            <TextView android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:text="@string/district"/>
-        </TableRow>
-    </TableLayout>
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="12dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_gravity="center|top"
+            android:gravity="center"
             >
 
-        </androidx.recyclerview.widget.RecyclerView>
-    </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 android:gravity="center"
+                 android:layout_margin="5dp"
+                 android:background="@color/White"
+                     android:orientation="horizontal">
+                     <androidx.cardview.widget.CardView
+                         android:layout_gravity="center"
+                         android:background="@drawable/border"
+                         app:cardCornerRadius="10dp"
+                         android:layout_width="300dp"
+                         android:layout_weight="1"
+                         android:layout_height="50dp">
+               <EditText
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:hint="Search"
+                   android:background="@null"
+                   android:inputType="textPersonName"
+                   android:layout_gravity="left"
+                       />
+                     </androidx.cardview.widget.CardView>
+             <ImageView
+                 android:layout_weight="1"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@mipmap/search"/>
+             </LinearLayout>
+
+
+               <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+        </LinearLayout>
+
+
+
 
 </FrameLayout>

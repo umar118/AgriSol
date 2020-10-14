@@ -17,23 +17,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateAdminAccount"></activity>
-        <activity android:name=".AdminLogin" />
-        <activity android:name=".AddMarketList" />
-        <activity android:name=".UpdateExpertProfile" />
-        <activity android:name=".ExpertSetting" />
-        <activity android:name=".UpdateUserProfile" />
-        <activity android:name=".CreateExpertAccount" />
-        <activity android:name=".RegisterExpertProfile" />
-        <activity android:name=".CreateUserAccount" />
-        <activity android:name=".MoreDetials" />
-        <activity android:name=".AddExpertDetials" />
-        <activity android:name=".ExpertDashboard" />
-        <activity android:name=".ResetPassword" />
-        <activity android:name=".Login" />
-        <activity android:name=".RegisterUserProfile" />
-        <activity android:name=".AboutUs" />
-        <activity android:name=".Setting" />
+        <activity android:name=".Market.UpdatePrice"></activity>
+        <activity android:name=".Market.UpdateMarketList" />
+        <activity android:name=".UpdateExpert.Admin_UpdateExpert" />
+        <activity android:name=".Admin.AdminDashboard" />
+        <activity android:name=".Admin.CreateAdminAccount" />
+        <activity android:name=".Admin.AdminLogin" />
+        <activity android:name=".Admin.AddMarketList" />
+        <activity android:name=".Expert.UpdateExpertProfile" />
+        <activity android:name=".Expert.ExpertSetting" />
+        <activity android:name=".User.UpdateUserProfile" />
+        <activity android:name=".Expert.CreateExpertAccount" />
+        <activity android:name=".Expert.RegisterExpertProfile" />
+        <activity android:name=".User.CreateUserAccount" />
+        <activity android:name=".Admin.AddExpertDetials" />
+        <activity android:name=".Expert.ExpertDashboard" />
+        <activity android:name=".Login.ResetPassword" />
+        <activity android:name=".Login.Login" />
+        <activity android:name=".User.RegisterUserProfile" />
+        <activity android:name=".Login.AboutUs" />
+        <activity android:name=".User.Setting" />
         <activity android:name=".AplicationLogo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,7 +44,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserDashboard" />
+        <activity android:name=".User.UserDashboard" />
         <activity android:name=".MainActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"

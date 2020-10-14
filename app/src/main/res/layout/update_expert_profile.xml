@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/Green_Apple"
     android:orientation="vertical"
-    tools:context=".UpdateExpertProfile">
+    tools:context=".Expert.UpdateExpertProfile">
 
     <LinearLayout
         android:layout_width="match_parent"

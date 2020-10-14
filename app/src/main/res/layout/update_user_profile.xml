@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:background="@color/Green_Apple"
-    tools:context=".UpdateUserProfile">
+    tools:context=".User.UpdateUserProfile">
 
     <include layout="@layout/toolbar2"
         android:layout_gravity="center"

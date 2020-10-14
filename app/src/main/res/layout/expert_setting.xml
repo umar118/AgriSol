@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:cardBackgroundColor="@color/Milk_White"
-    tools:context=".ExpertSetting">
+    tools:context=".Expert.ExpertSetting">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

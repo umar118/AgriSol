@@ -1,0 +1,176 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/Milk_White"
+    android:background="@drawable/border"
+    android:layout_gravity="top|center"
+    android:id="@+id/market_list_id"
+    android:layout_margin="5dp"
+    android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_gravity="right|center">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/crop_s_name"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/cropName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_gravity="left|center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/crop_s_price"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/cropPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_gravity="right|center">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/district"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/cropDistrict"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_gravity="left|center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/date"
+                    android:textStyle="bold"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/cropDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    android:background="@drawable/border"
+    >
+    <ImageView
+        android:id="@+id/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:src="@drawable/edit_icon"
+        android:layout_gravity="center"
+        android:background="@drawable/border"
+        android:layout_weight="1"/>
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:src="@drawable/delete_icon"
+        android:background="@drawable/border"
+        android:layout_gravity="center"
+        android:layout_weight="1"/>
+</LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

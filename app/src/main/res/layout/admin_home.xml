@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Admin.AdminHome">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    >
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@drawable/border"
+        app:cardBackgroundColor="@color/Green_Apple"
+        android:layout_margin="3dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/nav_home"
+            android:textColor="@color/White"
+            android:text="@string/home"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@drawable/border"
+        app:cardBackgroundColor="@color/Green_Apple"
+        android:layout_margin="3dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/add_icon"
+            android:textColor="@color/White"
+            android:text="@string/add_expert"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@drawable/border"
+        app:cardBackgroundColor="@color/Green_Apple"
+        android:layout_margin="3dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:drawableTop="@drawable/add_icon"
+            android:textColor="@color/White"
+            android:text="@string/add_market_list"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@drawable/border"
+        app:cardBackgroundColor="@color/Green_Apple"
+        android:layout_margin="3dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/nav_share"
+            android:textColor="@color/White"
+            android:text="@string/share"/>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/border"
+            app:cardBackgroundColor="@color/Green_Apple"
+            android:layout_margin="3dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/nav_profile"
+                android:textColor="@color/White"
+                android:text="@string/profile"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/border"
+            app:cardBackgroundColor="@color/Green_Apple"
+            android:layout_margin="3dp"
+            >
+            <TextView
+                android:id="@+id/updateexpert"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/nav_experts"
+                android:textColor="@color/White"
+                android:text="@string/upddate_expert"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/border"
+            app:cardBackgroundColor="@color/Green_Apple"
+            android:layout_margin="3dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/nav_market"
+                android:gravity="center"
+                android:textColor="@color/White"
+                android:text="@string/update_market_list"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/border"
+            app:cardBackgroundColor="@color/Green_Apple"
+            android:layout_margin="3dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/nav_setting"
+                android:textColor="@color/White"
+                android:text="@string/set"/>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

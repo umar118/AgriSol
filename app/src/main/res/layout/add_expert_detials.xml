@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/Green_Apple"
     android:orientation="vertical"
-    tools:context=".AddExpertDetials">
+    tools:context=".Admin.AddExpertDetials">
 
     <include
         android:layout_height="wrap_content"

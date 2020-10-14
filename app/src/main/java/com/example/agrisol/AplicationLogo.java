@@ -1,10 +1,12 @@
 package com.example.agrisol;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.agrisol.Login.Login;
 
 public class AplicationLogo extends AppCompatActivity {
     Handler handler;
@@ -17,7 +19,7 @@ public class AplicationLogo extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent=new Intent(AplicationLogo.this,Login.class);
+                Intent intent=new Intent(AplicationLogo.this, Login.class);
                 startActivity(intent);
                 finish();
             }

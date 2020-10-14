@@ -8,7 +8,7 @@
     android:layout_weight="1"
     android:background="@color/Green_Apple"
     android:layout_gravity="center"
-    tools:context=".AdminLogin">
+    tools:context=".Admin.AdminLogin">
 
 
     <include
