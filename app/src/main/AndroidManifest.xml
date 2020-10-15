@@ -22,19 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Admin.Home">
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:scheme="http"
-                    android:host="agrisolutions-app.com"
-                    android:path="/agrisolutions" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Admin.Home"/>
         <activity android:name=".Market.UpdatePrice" />
         <activity android:name=".Market.UpdateMarketList" />
         <activity android:name=".UpdateExpert.Admin_UpdateExpert" />
@@ -61,15 +49,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
 
-                <data
-                    android:scheme="http"
-                    android:host="agrisolutions-app.com"
-                    android:path="/agrisolutions" />
-
             </intent-filter>
         </activity>
         <activity android:name=".User.UserDashboard" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity"/>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
