@@ -97,21 +97,19 @@ public class UpdateMarketList extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                processSearch(query);
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                processSearch(newText);
+               adapter.getFilter().filter( newText );
                 return false;
             }
         });
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void processSearch(String newText) {
 
-    }
 
 }

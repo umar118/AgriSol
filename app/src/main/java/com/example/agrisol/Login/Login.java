@@ -88,7 +88,7 @@ public class Login extends AppCompatActivity {
            // if (mAuth.getCurrentUser() != null) {
              //     startActivity(new Intent(Login.this, UserDashboard.class));
                //     finish();
-                // }
+               //  }
            // else    if (mAuth.getCurrentUser() != null) {
            // startActivity(new Intent(Login.this, ExpertDashboard.class));
            // finish();

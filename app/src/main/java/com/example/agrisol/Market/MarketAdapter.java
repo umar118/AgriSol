@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,14 +15,16 @@ import com.example.agrisol.R;
 
 import java.util.ArrayList;
 
-public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder> {
+public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder> implements Filterable {
 
     Context context;
     ArrayList<Market> model;
+    ArrayList<Market> modelFilter;
 
     public MarketAdapter(Context context, ArrayList<Market> model) {
         this.context = context;
         this.model = model;
+        modelFilter =new ArrayList<>( model );
     }
 
     @NonNull
@@ -44,6 +48,40 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
     public int getItemCount() {
         return model.size();
     }
+
+    private Filter filter =new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<Market> filterList =new ArrayList<>( );
+            if(constraint==null|| constraint.length()==0){
+                filterList.addAll(modelFilter);
+            }
+            else {
+                String pattrn = constraint.toString().toLowerCase().trim();
+                for (Market item : modelFilter) {
+                    if (item.getName().toLowerCase().contains( pattrn )) {
+                        filterList.add( item );
+                    }
+                }
+            }
+            FilterResults filterResults=new FilterResults();
+            filterResults.values=filterList;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+                    model.clear();
+                    model.addAll( (ArrayList)results.values);
+                    notifyDataSetChanged();
+        }
+    };
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView CropName,CropPrice,CropDistrict,CropDate;

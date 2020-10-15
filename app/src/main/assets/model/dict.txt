@@ -1,0 +1,8 @@
+corn___healthy
+potato___healthy
+tomato___unhealthy
+grape___unhealthy
+tomato___healthy
+potato___unhealthy
+corn___unhealthy
+grape___healthy

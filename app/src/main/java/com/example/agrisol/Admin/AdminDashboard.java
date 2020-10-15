@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -17,16 +17,20 @@ import androidx.fragment.app.Fragment;
 
 import com.example.agrisol.Expert.ExpertDetials;
 import com.example.agrisol.Market.MarketPriceList;
+import com.example.agrisol.Market.UpdateMarketList;
 import com.example.agrisol.R;
 import com.example.agrisol.UpdateExpert.Admin_UpdateExpert;
-import com.example.agrisol.Market.UpdateMarketList;
+import com.example.agrisol.User.UserHome;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdminDashboard extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView  navigationView;
     BottomNavigationView nav;
+    CircleImageView profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +45,15 @@ public class AdminDashboard extends AppCompatActivity {
         TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
         mTitle.setText("AgriSolutions");
 
-        loadFragment(new AdminHome());
+        profile = findViewById( R.id.toolbar_profile);
+        profile.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity( new Intent( getApplicationContext(),Home.class ) );
+            }
+        } );
+
+        loadFragment(new UserHome());
 
         drawerLayout =findViewById(R.id.drawerlayout);
         ActionBarDrawerToggle toggle =new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
@@ -68,7 +80,7 @@ private  BottomNavigationView.OnNavigationItemSelectedListener navCustomView =ne
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                fragment = new AdminHome();
+                fragment = new UserHome();
                 break;
 
             case R.id.navigation_expert:
@@ -106,7 +118,7 @@ private NavigationView.OnNavigationItemSelectedListener navDraw = new Navigation
 
         switch (menuItem.getItemId()){
             case R.id.nav_home:
-                Toast.makeText(getApplicationContext(),"",Toast.LENGTH_SHORT).show();
+                startActivity( new Intent( getApplicationContext(),Home.class ) );
                 break;
             case  R.id.nav_update:
                 break;

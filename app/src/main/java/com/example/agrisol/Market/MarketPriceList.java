@@ -68,20 +68,25 @@ public class MarketPriceList extends Fragment  {
             }
         });
 
-       // searchView =getView().findViewById(R.id.search_CropName);
 
+
+        searchView = (SearchView) getView().findViewById( R.id.search );
+        searchView.setOnQueryTextListener( new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter( newText );
+                return false;
+            }
+        } );
 
     }
 
-    private void Search(String s){
 
-
-
-
-
-
-
-    }
 
 
 }

@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,18 +20,27 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.agrisol.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.ViewHolder> {
+import javax.xml.transform.Result;
+
+public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.ViewHolder> implements Filterable {
 
   Context context;
   ArrayList<Market> model;
+  ArrayList<Market> modelFilter;
   Dialog dialog;
 
     public PriceAdapter(Context context, ArrayList<Market> model) {
         this.context = context;
         this.model = model;
+        modelFilter =new ArrayList<>( model );
     }
 
     @NonNull
@@ -106,12 +117,15 @@ public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.ViewHolder> 
                 dis.setText( model.get( holder.getAdapterPosition() ).getDistrict() );
                 date.setText( model.get( holder.getAdapterPosition() ).getDate() );
 
-              //  HashMap<String ,Object> crop_map = new HashMap<>();
+                update.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-             //   crop_map.put("CropName", name.getText().toString());
-               // crop_map.put("CropPrice", price.getText().toString());
-               // crop_map.put("CropDistrict", dis.getText().toString());
-               // crop_map.put("Current_Date",date.getText().toString());
+                        FirebaseDatabase fb = FirebaseDatabase.getInstance();
+
+                    }
+                } );
+
 
                 dialog.show();
 
@@ -121,10 +135,68 @@ public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.ViewHolder> 
         } );
     }
 
+    public  void  updateValue(String text, Result r, final View v){
+
+        final  View view =v;
+        final  Result result = r;
+
+        FirebaseDatabase fb = FirebaseDatabase.getInstance();
+        final DatabaseReference ref = fb.getReference().child( "Market Rate" );
+
+        ref.addListenerForSingleValueEvent( new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    ref.child( "CropPrice" ).setValue( result );
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        } );
+
+    }
+
 
     @Override
     public int getItemCount() {
         return model.size();
+    }
+
+
+    private Filter filter =new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<Market> filterList =new ArrayList<>( );
+            if(constraint==null|| constraint.length()==0){
+                filterList.addAll(modelFilter);
+            }
+            else {
+                String pattrn = constraint.toString().toLowerCase().trim();
+                for (Market item : modelFilter) {
+                    if (item.getName().toLowerCase().contains( pattrn )) {
+                        filterList.add( item );
+                    }
+                }
+            }
+            FilterResults filterResults=new FilterResults();
+            filterResults.values=filterList;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            model.clear();
+            model.addAll( (ArrayList)results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+    @Override
+    public Filter getFilter() {
+        return filter;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
