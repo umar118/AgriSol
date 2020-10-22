@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,47 +63,50 @@ public class ExpertProfile extends Fragment {
                 startActivity(new Intent(ExpertProfile.this.getContext(), UpdateExpertProfile.class));
             }
         });
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Expert").child(user.getUid());
-        UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("User Profile Images");
-
-        UsersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                if (dataSnapshot.exists()) {
+try {
 
 
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    UsersRef = FirebaseDatabase.getInstance().getReference().child( "Users" ).child( "Expert" ).child( user.getUid() );
+    UserProfileImageRef = FirebaseStorage.getInstance().getReference().child( "User Profile Images" );
 
-                    String image = dataSnapshot.child("expertprofileimage").getValue().toString();
-                    String expert_FullName = dataSnapshot.child("expert_FullName").getValue().toString();
-                    String expert_Email = dataSnapshot.child("expert_Email").getValue().toString();
-                    String expert_MobileNo = dataSnapshot.child("expert_MobileNo").getValue().toString();
-                    String expert_City = dataSnapshot.child("expert_City").getValue().toString();
-                    String expert_Province = dataSnapshot.child("expert_Province").getValue().toString();
-                    String expert_Country = dataSnapshot.child("expert_Country").getValue().toString();
-                    String expert_Qualification = dataSnapshot.child("expert_Qualification").getValue().toString();
-                    String expert_Experties = dataSnapshot.child("expert_Experties").getValue().toString();
+    UsersRef.addValueEventListener( new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    textFullname.setText(expert_FullName);
-                    textUseremail.setText(expert_Email);
-                    textUsermobile.setText(expert_MobileNo);
-                    textUsercity.setText(expert_City);
-                    textUsercountry.setText(expert_Country);
-                    textUserprovince.setText(expert_Province);
-                    textExpertQualification.setText(expert_Qualification);
-                    textExperties.setText(expert_Experties);
-                    Picasso.get().load(image).placeholder(R.drawable.profile).into(ProfileImage);
-                }
+            if (dataSnapshot.exists()) {
+
+                String image = dataSnapshot.child( "expertprofileimage" ).getValue().toString();
+                String expert_FullName = dataSnapshot.child( "expert_FullName" ).getValue().toString();
+                String expert_Email = dataSnapshot.child( "expert_Email" ).getValue().toString();
+                String expert_MobileNo = dataSnapshot.child( "expert_MobileNo" ).getValue().toString();
+                String expert_City = dataSnapshot.child( "expert_City" ).getValue().toString();
+                String expert_Province = dataSnapshot.child( "expert_Province" ).getValue().toString();
+                String expert_Country = dataSnapshot.child( "expert_Country" ).getValue().toString();
+                String expert_Qualification = dataSnapshot.child( "expert_Qualification" ).getValue().toString();
+                String expert_Experties = dataSnapshot.child( "expert_Experties" ).getValue().toString();
+
+                textFullname.setText( expert_FullName );
+                textUseremail.setText( expert_Email );
+                textUsermobile.setText( expert_MobileNo );
+                textUsercity.setText( expert_City );
+                textUsercountry.setText( expert_Country );
+                textUserprovince.setText( expert_Province );
+                textExpertQualification.setText( expert_Qualification );
+                textExperties.setText( expert_Experties );
+                Picasso.get().load( image ).placeholder( R.drawable.profile ).into( ProfileImage );
             }
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-
+        }
+    } );
+}
+catch (Exception i ){
+    Toast.makeText( getContext(),i.getMessage(),Toast.LENGTH_SHORT ).show();
+}
     }
 
 }

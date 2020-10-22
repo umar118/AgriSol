@@ -105,27 +105,36 @@
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            app:errorEnabled="true"
+        <LinearLayout
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="@string/date"
+            android:layout_weight="1"
             android:layout_gravity="center"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeColor="@color/Green_Apple"
-            android:outlineProvider="paddedBounds"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
+            android:gravity="center"
+            android:background="@drawable/border"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:textColor="@color/White"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="@color/Green_Apple"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/date"
+           android:drawableLeft="@drawable/date"
+            />
+            <TextView
                 android:id="@+id/Edit_current_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
+                android:layout_width="280dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
                 />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
+        </LinearLayout>
         <androidx.cardview.widget.CardView
             android:id="@+id/Add_List"
             app:cardBackgroundColor="@color/Green_Apple"

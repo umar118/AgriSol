@@ -1,17 +1,18 @@
 package com.example.agrisol.Market;
 
-public class Market  {
+public class Market {
 
-    private String Name,Price,District,Date,uid;
+    private String Name, Price, District, Date, uid;
 
-    public Market(){}
-
-    public Market(String name, String price, String district, String date,String uid) {
+    public Market(String name, String price, String district, String date, String uid) {
         Name = name;
         Price = price;
         District = district;
         Date = date;
-        uid=uid;
+        this.uid = uid;
+    }
+
+    public Market() {
     }
 
     public String getName() {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -172,11 +173,6 @@ UpdateUser();
             }
         });
 
-
-
-
-
-
         UserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
@@ -280,38 +276,39 @@ UpdateUser();
         final   String User_Country= Country.getText().toString().trim();
         final   String User_Occupation= Occupation.getText().toString().trim();
 
-
         if(TextUtils.isEmpty(User_Fullname))
         {
-            Toast.makeText(UpdateUserProfile.this, "Please write your full name...", Toast.LENGTH_SHORT).show();
+            FullName.setError( "Enter Name" );
         }
         else if(TextUtils.isEmpty(User_Email))
         {
-            Toast.makeText(UpdateUserProfile.this, "Please write your Surname...", Toast.LENGTH_SHORT).show();
+            Email.setError( "Enter Registered Email Address" );
         }
-        //    else if(TextUtils.isEmpty(User_Password))
-        //   {
-        //        Toast.makeText(RegisterUserProfile.this, "Please write your Department...", Toast.LENGTH_SHORT).show();
-        //    }
+        else if(!Patterns.EMAIL_ADDRESS.matcher( User_Email ).matches()){
+            Email.setError( "Please Enter Valid Email" );
+        }
         else if(TextUtils.isEmpty(User_Mobile_no))
         {
-            Toast.makeText(UpdateUserProfile.this, "Please write your Batch...", Toast.LENGTH_SHORT).show();
+            Mobile.setError( "Enter Mobile Number" );
+        }
+        else if (!Patterns.PHONE.matcher( User_Mobile_no ).matches()){
+            Mobile.setError( "Enter Valid Mobile Number" );
         }
         else if(TextUtils.isEmpty(User_Occupation))
         {
-            Toast.makeText(UpdateUserProfile.this, "Please write your Year...", Toast.LENGTH_SHORT).show();
+            Occupation.setError( "Enter Occupation" );
         }
         else if(TextUtils.isEmpty(User_City))
         {
-            Toast.makeText(UpdateUserProfile.this, "Please write your Batch...", Toast.LENGTH_SHORT).show();
+            City.setError( "Enter City Name" );
         }
         else if(TextUtils.isEmpty(User_Province))
         {
-            Toast.makeText(UpdateUserProfile.this, "Please write your Semester...", Toast.LENGTH_SHORT).show();
+            Province.setError( "Enter Province Name" );
         }
         else if(TextUtils.isEmpty(User_Country))
         {
-            Toast.makeText(UpdateUserProfile.this, "Please write your Year...", Toast.LENGTH_SHORT).show();
+            Country.setError( "Enter Country" );
         }
 
         else

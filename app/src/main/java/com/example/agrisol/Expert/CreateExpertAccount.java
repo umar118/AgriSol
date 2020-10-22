@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,11 +21,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.regex.Pattern;
+
 public class CreateExpertAccount extends AppCompatActivity {
     private EditText ExpertEmail,ExpertPassword,ExpertConfirmPassword;
     private FirebaseAuth mAuth;
     private ProgressDialog loadingBar;
     private Button RegisterExpert;
+    private static final Pattern PASSWORD_PATTERN =Pattern.compile( "^"+"(?=.*[0-9])"+"(?=.*[a-zA-Z])"+"(?=\\S+$)"+".{6,}"+"$" );
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,13 +64,21 @@ public class CreateExpertAccount extends AppCompatActivity {
                 String Expert_ConfirmPassword = ExpertConfirmPassword.getText().toString();
 
                 if (TextUtils.isEmpty(Expert_Email)) {
-                    Toast.makeText(CreateExpertAccount.this, "Please write your email...", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(Expert_Password)) {
-                    Toast.makeText(CreateExpertAccount.this, "Please write your password...", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(Expert_ConfirmPassword)) {
-                    Toast.makeText(CreateExpertAccount.this, "Please confirm your email", Toast.LENGTH_SHORT).show();
+                   ExpertEmail.setError( "Please Enter Email" );
+                }
+                else if(!Patterns.EMAIL_ADDRESS.matcher( Expert_Email ).matches()){
+                    ExpertEmail.setError( "Please Enter Valid Email" );
+                }
+                else if (TextUtils.isEmpty(Expert_Password)) {
+                    ExpertPassword.setError( "Please Enter Password" );
+                }
+                else if(!PASSWORD_PATTERN.matcher( Expert_Password ).matches()){
+                    ExpertPassword.setError( "Weak Password" );
+                }
+                else if (TextUtils.isEmpty(Expert_ConfirmPassword)) {
+                    ExpertConfirmPassword.setError( "Enter Confirm Password" );
                 } else if (!Expert_Password.equals(Expert_ConfirmPassword)) {
-                    Toast.makeText(CreateExpertAccount.this, "Your password does not match...", Toast.LENGTH_SHORT).show();
+                    ExpertConfirmPassword.setError( "Entered Password Not Be Match" );
                 } else {
                     loadingBar.setTitle("Creating New Account");
                     loadingBar.setMessage("Please Wait, while we are creating your Account...");
@@ -77,13 +89,7 @@ public class CreateExpertAccount extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-
-                                //   String current_user_id;
-                                //     current_user_id = mAuth.getCurrentUser().getUid();
-                                //   final DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference().child("Users").child("User").child(current_user_id);
-
                                 SendUserToSetupActivity();
-                                Toast.makeText(CreateExpertAccount.this, "you are authenticated succesfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
 
                             } else {

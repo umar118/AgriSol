@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,12 +21,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.regex.Pattern;
+
 
 public class CreateUserAccount extends AppCompatActivity {
     private EditText UserEmail,UserPassword,UserConfirmPassword;
     private FirebaseAuth mAuth;
     private ProgressDialog loadingBar;
     private Button RegisterUser;
+    private static final Pattern PASSWORD_PATTERN =Pattern.compile( "^"+"(?=.*[0-9])"+"(?=.*[a-zA-Z])"+"(?=\\S+$)"+".{6,}"+"$" );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +67,21 @@ public class CreateUserAccount extends AppCompatActivity {
                 String User_ConfirmPassword = UserConfirmPassword.getText().toString();
 
                 if (TextUtils.isEmpty(User_Email)) {
-                    Toast.makeText(CreateUserAccount.this, "Please write your email...", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(User_Password)) {
-                    Toast.makeText(CreateUserAccount.this, "Please write your password...", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(User_ConfirmPassword)) {
-                    Toast.makeText(CreateUserAccount.this, "Please confirm your email", Toast.LENGTH_SHORT).show();
+                    UserEmail.setError( "Please Enter Email" );
+                }
+                else if(!Patterns.EMAIL_ADDRESS.matcher( User_Email ).matches()){
+                    UserEmail.setError( "Please Enter Valid Email" );
+                }
+                else if (TextUtils.isEmpty(User_Password)) {
+                   UserPassword.setError( "Please Enter Password" );
+                }
+                else if(!PASSWORD_PATTERN.matcher( User_Password ).matches()){
+                    UserPassword.setError( "Weak Password" );
+                }
+                else if (TextUtils.isEmpty(User_ConfirmPassword)) {
+                    UserConfirmPassword.setError( "Please Enter Confirm Password" );
                 } else if (!User_Password.equals(User_ConfirmPassword)) {
-                    Toast.makeText(CreateUserAccount.this, "Your password does not match...", Toast.LENGTH_SHORT).show();
+                    UserConfirmPassword.setError( "Entered Password Not Be Match" );
                 } else {
                     loadingBar.setTitle("Creating New Account");
                     loadingBar.setMessage("Please Wait, while we are creating your Account...");
@@ -80,11 +92,6 @@ public class CreateUserAccount extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-
-                             //   String current_user_id;
-                             //     current_user_id = mAuth.getCurrentUser().getUid();
-                             //   final DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference().child("Users").child("User").child(current_user_id);
-
                                 SendUserToSetupActivity();
                                 Toast.makeText(CreateUserAccount.this, "you are authenticated succesfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();

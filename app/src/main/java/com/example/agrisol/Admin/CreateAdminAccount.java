@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class CreateAdminAccount extends AppCompatActivity {
 
@@ -31,6 +33,7 @@ public class CreateAdminAccount extends AppCompatActivity {
     Button createAdmin;
     private FirebaseAuth mAuth;
     private ProgressDialog loadingBar;
+    private static final Pattern PASSWORD_PATTERN =Pattern.compile( "^"+"(?=.*[0-9])"+"(?=.*[a-zA-Z])"+"(?=\\S+$)"+".{6,}"+"$" );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +70,21 @@ public class CreateAdminAccount extends AppCompatActivity {
       final   String Admin_Mobile = AdminMobile.getText().toString().trim();
 
         if (TextUtils.isEmpty(Admin_Email)) {
-            Toast.makeText(CreateAdminAccount.this, "Please write your email...", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(Admin_Password)) {
-            Toast.makeText(CreateAdminAccount.this, "Please write your password...", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(Admin_Name)) {
-            Toast.makeText(CreateAdminAccount.this, "Please confirm your email", Toast.LENGTH_SHORT).show();
+            AdminEmail.setError( "Please Enter Email" );
+        }
+        else if(!Patterns.EMAIL_ADDRESS.matcher( Admin_Email ).matches()){
+            AdminEmail.setError( "Please Enter Valid Email" );
+        }
+        else if (TextUtils.isEmpty(Admin_Password)) {
+            AdminPassword.setError( "Please Enter Password" );
+        }
+        else if(!PASSWORD_PATTERN.matcher( Admin_Password ).matches()){
+            AdminPassword.setError( "Weak Password" );
+        }
+        else if (TextUtils.isEmpty(Admin_Name)) {
+           AdminName.setError( "Please Enter Name" );
         } else if (TextUtils.isEmpty(Admin_Mobile)) {
-            Toast.makeText(CreateAdminAccount.this, "Your password does not match...", Toast.LENGTH_SHORT).show();
+           AdminMobile.setError( "Please Enter Mobile Number" );
         } else {
             loadingBar.setTitle("Creating New Account");
             loadingBar.setMessage("Please Wait, while we are creating your Account...");

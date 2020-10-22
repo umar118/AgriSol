@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -214,35 +215,37 @@ public class RegisterUserProfile extends AppCompatActivity {
 
         if(TextUtils.isEmpty(User_Fullname))
         {
-            Toast.makeText(RegisterUserProfile.this, "Please write your full name...", Toast.LENGTH_SHORT).show();
+            FullName.setError( "Enter Name" );
         }
         else if(TextUtils.isEmpty(User_Email))
         {
-            Toast.makeText(RegisterUserProfile.this, "Please write your Surname...", Toast.LENGTH_SHORT).show();
+           Email.setError( "Enter Registered Email Address" );
         }
-        //    else if(TextUtils.isEmpty(User_Password))
-        //   {
-        //        Toast.makeText(RegisterUserProfile.this, "Please write your Department...", Toast.LENGTH_SHORT).show();
-        //    }
+        else if(!Patterns.EMAIL_ADDRESS.matcher( User_Email ).matches()){
+            Email.setError( "Please Enter Valid Email" );
+        }
         else if(TextUtils.isEmpty(User_Mobile_no))
         {
-            Toast.makeText(RegisterUserProfile.this, "Please write your Batch...", Toast.LENGTH_SHORT).show();
+           Mobile.setError( "Enter Mobile Number" );
+        }
+        else if (!Patterns.PHONE.matcher( User_Mobile_no ).matches()){
+            Mobile.setError( "Enter Valid Mobile Number" );
         }
         else if(TextUtils.isEmpty(User_Occupation))
         {
-            Toast.makeText(RegisterUserProfile.this, "Please write your Year...", Toast.LENGTH_SHORT).show();
+           Occupation.setError( "Enter Occupation" );
         }
         else if(TextUtils.isEmpty(User_City))
         {
-            Toast.makeText(RegisterUserProfile.this, "Please write your Batch...", Toast.LENGTH_SHORT).show();
+            City.setError( "Enter City Name" );
         }
         else if(TextUtils.isEmpty(User_Province))
         {
-            Toast.makeText(RegisterUserProfile.this, "Please write your Semester...", Toast.LENGTH_SHORT).show();
+            Province.setError( "Enter Province Name" );
         }
         else if(TextUtils.isEmpty(User_Country))
         {
-            Toast.makeText(RegisterUserProfile.this, "Please write your Year...", Toast.LENGTH_SHORT).show();
+           Country.setError( "Enter Country" );
         }
 
         else
@@ -256,36 +259,16 @@ public class RegisterUserProfile extends AppCompatActivity {
 
             userMap.put("user_FullName",User_Fullname);
             userMap.put("user_Email",User_Email);
-            //  userMap.put("user_Password",User_Password);
             userMap.put("user_MobileNo",User_Mobile_no);
             userMap.put("user_Occupation",User_Occupation);
             userMap.put("user_City",User_City);
             userMap.put("user_Province",User_Province);
             userMap.put("user_Country",User_Country);
-            //   mAuth.createUserWithEmailAndPassword(User_Email, User_Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            //  @Override
-            //  public void onComplete(@NonNull Task<AuthResult> task) {
-            //     if (task.isSuccessful()) {
 
-
-
-            //  current_user_id = mAuth.getCurrentUser().getUid();
-            //  UserRef = FirebaseDatabase.getInstance().getReference().child("Users").child("User").child(current_user_id);
             loadingBar.dismiss();
             loadingBar.setMessage("Creating Your Account");
             loadingBar.show();
             loadingBar.setCanceledOnTouchOutside(false);
-
-
-                   /*     UserProfileViewModel user = new UserProfileViewModel();
-                        user.setUserProfile(ProfileImage.getId());
-                        user.setUserFullName(FullName.getText().toString());
-                        user.setUserEmail(Email.getText().toString());
-                        user.setUserMobile(Mobile.getText().toString());
-                        user.setUserOccup(Occupation.getText().toString());
-                        user.setUserCity(City.getText().toString());
-                        user.setUserProvince(Province.getText().toString());
-                        user.setUserCountry(Country.getText().toString()); */
 
             UserRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
@@ -303,13 +286,6 @@ public class RegisterUserProfile extends AppCompatActivity {
                     }
                 }
             });
-            // } else {
-            //   String message = task.getException().getMessage();
-            //  Toast.makeText(RegisterUserProfile.this, "Error: " + message, Toast.LENGTH_SHORT).show();
-            //  loadingBar.dismiss();
-            //}
-            //}
-            //});
 
         }
     }

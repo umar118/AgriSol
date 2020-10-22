@@ -9,7 +9,14 @@
     android:layout_height="wrap_content">
 
 
-
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    app:cardBackgroundColor="@color/White"
+    android:layout_weight="1"
+    app:cardCornerRadius="5dp"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,8 +47,9 @@
                     android:layout_gravity="center"
                     android:text="@string/crop_s_name"
                     android:layout_weight="1"
+                    android:textColor="@color/Green_Apple"
                     android:textStyle="bold"
-                    android:textSize="18sp"/>
+                    android:textSize="17sp"/>
 
                 <TextView
                     android:id="@+id/cropName"
@@ -64,9 +72,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/crop_s_price"
+                    android:textColor="@color/Green_Apple"
                     android:layout_weight="1"
                     android:textStyle="bold"
-                    android:textSize="18sp"/>
+                    android:textSize="17sp"/>
 
                 <TextView
                     android:id="@+id/cropPrice"
@@ -104,8 +113,9 @@
                     android:layout_gravity="center"
                     android:text="@string/district"
                     android:layout_weight="1"
+                    android:textColor="@color/Green_Apple"
                     android:textStyle="bold"
-                    android:textSize="18sp"/>
+                    android:textSize="17sp"/>
 
                 <TextView
                     android:id="@+id/cropDistrict"
@@ -128,8 +138,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/date"
+                    android:textColor="@color/Green_Apple"
                     android:textStyle="bold"
-                    android:textSize="18sp"/>
+                    android:textSize="17sp"/>
 
                 <TextView
                     android:id="@+id/cropDate"
@@ -145,7 +156,7 @@
 
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="40dp"
     android:orientation="horizontal"
     android:layout_gravity="center"
     android:background="@drawable/border"
@@ -153,7 +164,7 @@
     <ImageView
         android:id="@+id/edit"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:src="@drawable/edit_icon"
         android:layout_gravity="center"
         android:background="@drawable/border"
@@ -161,7 +172,7 @@
     <ImageView
         android:id="@+id/delete"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:src="@drawable/delete_icon"
         android:background="@drawable/border"
         android:layout_gravity="center"
@@ -172,5 +183,5 @@
 
     </LinearLayout>
 
-
+</androidx.cardview.widget.CardView>
 </LinearLayout>

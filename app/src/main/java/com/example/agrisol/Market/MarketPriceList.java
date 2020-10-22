@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MarketPriceList extends Fragment  {
+public class MarketPriceList extends Fragment {
 
     RecyclerView recyclerView;
     ArrayList<Market> marketList;
@@ -34,59 +35,60 @@ public class MarketPriceList extends Fragment  {
                              @Nullable Bundle savedInstanceState) {
 
 
-        return inflater.inflate(R.layout.market_price_list, container, false);
+        return inflater.inflate( R.layout.market_price_list, container, false );
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+        super.onActivityCreated( savedInstanceState );
 
-        recyclerView =getView().findViewById(R.id.recyclerView_price);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        marketList =new ArrayList<>();
+        recyclerView = getView().findViewById( R.id.recyclerView_price );
+        recyclerView.setLayoutManager( new LinearLayoutManager( this.getContext() ) );
+        marketList = new ArrayList<>();
+try {
 
-        ref = FirebaseDatabase.getInstance().getReference().child("Market Rate");
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    for (DataSnapshot dataSnapshot:snapshot.getChildren()){
-                        Market market =dataSnapshot.getValue(Market.class);
-                        market.setName(dataSnapshot.child("CropName").getValue().toString());
-                        market.setPrice(dataSnapshot.child("CropPrice").getValue().toString());
-                        market.setDistrict(dataSnapshot.child("CropDistrict").getValue().toString());
-                        market.setDate(dataSnapshot.child("Current_Date").getValue().toString());
-                        marketList.add(market);
-                    }
-                    adapter = new MarketAdapter(MarketPriceList.this.getContext(),marketList);
-                    recyclerView.setAdapter(adapter);
+    ref = FirebaseDatabase.getInstance().getReference( "Market_Rate" );
+    ref.addValueEventListener( new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                Market market = dataSnapshot.getValue( Market.class );
+                market.setName( dataSnapshot.child( "name" ).getValue().toString() );
+                market.setPrice( dataSnapshot.child( "price" ).getValue().toString() );
+                market.setDistrict( dataSnapshot.child( "district" ).getValue().toString() );
+                market.setDate( dataSnapshot.child( "date" ).getValue().toString() );
+                marketList.add( market );
             }
+            adapter = new MarketAdapter( MarketPriceList.this.getContext(), marketList );
+            recyclerView.setAdapter( adapter );
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+        }
+    } );
 
 
+    searchView = (SearchView) getView().findViewById( R.id.search );
+    searchView.setOnQueryTextListener( new SearchView.OnQueryTextListener() {
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            return false;
+        }
 
-        searchView = (SearchView) getView().findViewById( R.id.search );
-        searchView.setOnQueryTextListener( new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            adapter.getFilter().filter( newText );
+            return false;
+        }
+    } );
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter( newText );
-                return false;
-            }
-        } );
-
+}
+catch (Exception i){
+    Toast.makeText( getContext(),i.getMessage(),Toast.LENGTH_SHORT ).show();
+}
     }
-
-
-
-
 }

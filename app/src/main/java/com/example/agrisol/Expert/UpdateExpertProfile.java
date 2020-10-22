@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -252,24 +253,30 @@ public class UpdateExpertProfile extends AppCompatActivity {
 
 
         if (TextUtils.isEmpty(Expert_Fullname)) {
-            Toast.makeText(UpdateExpertProfile.this, "Please write your full name...", Toast.LENGTH_SHORT).show();
+            ExpertFullName.setError( "Enter Name" );
         } else if (TextUtils.isEmpty(Expert_Email)) {
-            Toast.makeText(UpdateExpertProfile.this, "Please write your email...", Toast.LENGTH_SHORT).show();
+            ExpertEmail.setError( "Enter Registered Email Address" );
+        }
+        else if(!Patterns.EMAIL_ADDRESS.matcher( Expert_Email ).matches()){
+            ExpertEmail.setError( "Please Enter Valid Email" );
         }
         else if (TextUtils.isEmpty(Expert_MobileNo)) {
-            Toast.makeText(UpdateExpertProfile.this, "Please write your mobile...", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(Expert_Qualification)) {
-            Toast.makeText(UpdateExpertProfile.this, "Please write your qualification...", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(Expert_City)) {
-            Toast.makeText(UpdateExpertProfile.this, "Please write your city...", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(Expert_Province)) {
-            Toast.makeText(UpdateExpertProfile.this, "Please write your province...", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(Expert_Country)) {
-            Toast.makeText(UpdateExpertProfile.this, "Please write your country...", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(Expert_Experties)) {
-            Toast.makeText(UpdateExpertProfile.this, "Please write your experise...", Toast.LENGTH_SHORT).show();
+            ExpertMobile.setError( "Enter Mobile Number" );
         }
-
+        else if (!Patterns.PHONE.matcher( Expert_MobileNo ).matches()){
+            ExpertMobile.setError( "Enter Valid Mobile Number" );
+        }
+        else if (TextUtils.isEmpty(Expert_Qualification)) {
+            ExpertQualification.setError( "Enter Qualification" );
+        } else if (TextUtils.isEmpty(Expert_City)) {
+            ExpertCity.setError( "Enter City Name" );
+        } else if (TextUtils.isEmpty(Expert_Province)) {
+            ExpertProvince.setError( "Enter Province" );
+        } else if (TextUtils.isEmpty(Expert_Country)) {
+            ExpertCountry.setError( "Enter Country" );
+        } else if (TextUtils.isEmpty(Expert_Experties)) {
+            ExpertExperties.setError( "Enter Expertise" );
+        }
         else
         {
             loadingBar.setTitle("Updating");

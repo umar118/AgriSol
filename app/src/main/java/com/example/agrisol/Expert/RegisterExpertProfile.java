@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,7 +40,7 @@ import java.util.HashMap;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RegisterExpertProfile extends AppCompatActivity {
-    private EditText ExpertFullName, ExpertEmail,ExpertCity, ExpertProvince,ExpertCountry,ExpertQualification,ExpertMobile,ExpertExperties,ExpertUniversity;
+    private EditText ExpertFullName, ExpertEmail,ExpertCity, ExpertProvince,ExpertCountry,ExpertQualification,ExpertMobile,ExpertExperties;
     private FirebaseAuth mAuth;
     private CircleImageView ExpertProfile;
     private DatabaseReference UsersRef;
@@ -203,22 +204,29 @@ public class RegisterExpertProfile extends AppCompatActivity {
 
 
         if (TextUtils.isEmpty(Expert_Fullname)) {
-            Toast.makeText(RegisterExpertProfile.this, "Please write your full name...", Toast.LENGTH_SHORT).show();
+           ExpertFullName.setError( "Enter Name" );
         } else if (TextUtils.isEmpty(Expert_Email)) {
-            Toast.makeText(RegisterExpertProfile.this, "Please write your email...", Toast.LENGTH_SHORT).show();
+            ExpertEmail.setError( "Enter Registered Email Address" );
+        }
+        else if(!Patterns.EMAIL_ADDRESS.matcher( Expert_Email ).matches()){
+            ExpertEmail.setError( "Please Enter Valid Email" );
         }
         else if (TextUtils.isEmpty(Expert_MobileNo)) {
-            Toast.makeText(RegisterExpertProfile.this, "Please write your mobile...", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(Expert_Qualification)) {
-            Toast.makeText(RegisterExpertProfile.this, "Please write your qualification...", Toast.LENGTH_SHORT).show();
+           ExpertMobile.setError( "Enter Mobile Number" );
+        }
+        else if (!Patterns.PHONE.matcher( Expert_MobileNo ).matches()){
+            ExpertMobile.setError( "Enter Valid Mobile Number" );
+        }
+        else if (TextUtils.isEmpty(Expert_Qualification)) {
+           ExpertQualification.setError( "Enter Qualification" );
         } else if (TextUtils.isEmpty(Expert_City)) {
-            Toast.makeText(RegisterExpertProfile.this, "Please write your city...", Toast.LENGTH_SHORT).show();
+           ExpertCity.setError( "Enter City Name" );
         } else if (TextUtils.isEmpty(Expert_Province)) {
-            Toast.makeText(RegisterExpertProfile.this, "Please write your province...", Toast.LENGTH_SHORT).show();
+           ExpertProvince.setError( "Enter Province" );
         } else if (TextUtils.isEmpty(Expert_Country)) {
-            Toast.makeText(RegisterExpertProfile.this, "Please write your country...", Toast.LENGTH_SHORT).show();
+            ExpertCountry.setError( "Enter Country" );
         } else if (TextUtils.isEmpty(Expert_Experties)) {
-            Toast.makeText(RegisterExpertProfile.this, "Please write your experise...", Toast.LENGTH_SHORT).show();
+           ExpertExperties.setError( "Enter Expertise" );
         }
 
         else
@@ -228,7 +236,14 @@ public class RegisterExpertProfile extends AppCompatActivity {
             loadingBar.show();
             loadingBar.setCanceledOnTouchOutside(true);
 
-            HashMap expertMap = new HashMap();
+           // mAuth = FirebaseAuth.getInstance();
+           // UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Expert");
+          //  Experts experts;
+          //  experts = new Experts(Expert_Fullname,Expert_Email,Expert_MobileNo,Expert_Qualification,Expert_City,Expert_Province,Expert_Country,Expert_Experties,mAuth.getCurrentUser().getUid());
+         //   String current_user = mAuth.getCurrentUser().getUid();
+         //   UsersRef.child( current_user ).setValue( experts );
+
+         HashMap expertMap = new HashMap();
 
             expertMap.put("expert_FullName",Expert_Fullname);
             expertMap.put("expert_Email",Expert_Email);
@@ -239,13 +254,12 @@ public class RegisterExpertProfile extends AppCompatActivity {
             expertMap.put("expert_Country",Expert_Country);
             expertMap.put("expert_Experties",Expert_Experties);
 
+            SendToExpertDashboard();
             loadingBar.dismiss();
             loadingBar.setMessage("Creating Your Account");
             loadingBar.show();
-            loadingBar.setCanceledOnTouchOutside(false);
 
-
-            UsersRef.updateChildren(expertMap).addOnCompleteListener(new OnCompleteListener() {
+           UsersRef.updateChildren(expertMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if (task.isSuccessful()) {
@@ -262,6 +276,7 @@ public class RegisterExpertProfile extends AppCompatActivity {
                 }
             });
         }
+
     }
     @Override
     public void onBackPressed() {
@@ -269,6 +284,10 @@ public class RegisterExpertProfile extends AppCompatActivity {
         finish();
     }
 
+    private void  SendToExpertDashboard(){
+        startActivity( new Intent( getApplicationContext(),ExpertDashboard.class ) );
+        finish();
+    }
 
 
 }

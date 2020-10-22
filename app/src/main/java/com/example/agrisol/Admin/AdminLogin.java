@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.regex.Pattern;
+
 public class AdminLogin extends AppCompatActivity {
 
     EditText adminEmail,adminPassword;
@@ -35,6 +38,7 @@ public class AdminLogin extends AppCompatActivity {
     FirebaseAuth mAuth;
     ProgressDialog loadingBar;
     ImageView adminCreate;
+    private static final Pattern PASSWORD_PATTERN =Pattern.compile( "^"+"(?=.*[0-9])"+"(?=.*[a-zA-Z])"+"(?=\\S+$)"+".{6,}"+"$" );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +84,17 @@ public class AdminLogin extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(Admin_Email))
                 {
-                    Toast.makeText(AdminLogin.this, "Please write your email...", Toast.LENGTH_SHORT).show();
+                    adminEmail.setError( "Please Enter Email" );
+                }
+                else if(!Patterns.EMAIL_ADDRESS.matcher( Admin_Email ).matches()){
+                    adminEmail.setError( "Please Enter Valid Email" );
                 }
                 else  if(TextUtils.isEmpty(Admin_Password))
                 {
-                    Toast.makeText(AdminLogin.this, "Please write your password...", Toast.LENGTH_SHORT).show();
+                    adminPassword.setError( "Please Enter Password" );
+                }
+                else if(!PASSWORD_PATTERN.matcher( Admin_Password ).matches()){
+                    adminPassword.setError( "Weak Password" );
                 }
                 else
                 {
@@ -96,7 +106,6 @@ public class AdminLogin extends AppCompatActivity {
                     mAuth.signInWithEmailAndPassword(Admin_Email,Admin_Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-
                                     if(task.isSuccessful())
                                     {
                                        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Admin");
@@ -108,9 +117,7 @@ public class AdminLogin extends AppCompatActivity {
                                                     loadingBar.dismiss();
                                                     adminEmail.setText("");
                                                     adminPassword.setText("");
-                                                    Intent intent = new Intent(getApplicationContext(), AdminDashboard.class);
-                                                    startActivity(intent);
-                                                    finish();
+                                                    SendUserToMainActivity();
                                                 } else {
                                                     Toast.makeText(AdminLogin.this, "This email doesnot exist in this category", Toast.LENGTH_SHORT).show();
                                                     loadingBar.dismiss();
@@ -123,7 +130,7 @@ public class AdminLogin extends AppCompatActivity {
                                             }
                                         });
 
-                                        SendUserToMainActivity();
+
                                         Toast.makeText(AdminLogin.this, "You are login sucessfully...", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
                                     }
@@ -143,9 +150,6 @@ public class AdminLogin extends AppCompatActivity {
             }
         });
     }
-
-
-
 
     private void SendUserToMainActivity() {
 

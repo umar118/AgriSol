@@ -6,14 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
-
     <uses-permission android:name="android.permission.CAMERA" />
-
-    <dist:module dist:instant="true" />
 
     <application
         android:allowBackup="true"
@@ -22,14 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Admin.Home"/>
+        <activity android:name=".ChatSystem.ChatBox"></activity>
+        <activity android:name=".Admin.Home" />
         <activity android:name=".Market.UpdatePrice" />
         <activity android:name=".Market.UpdateMarketList" />
         <activity android:name=".UpdateExpert.Admin_UpdateExpert" />
         <activity android:name=".Admin.AdminDashboard" />
         <activity android:name=".Admin.CreateAdminAccount" />
         <activity android:name=".Admin.AdminLogin" />
-        <activity android:name=".Admin.AddMarketList" />
+        <activity android:name=".Admin.AddMarketList"></activity>
         <activity android:name=".Expert.UpdateExpertProfile" />
         <activity android:name=".Expert.ExpertSetting" />
         <activity android:name=".User.UpdateUserProfile" />
@@ -48,11 +42,12 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
         </activity>
         <activity android:name=".User.UserDashboard" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" >
+
+        </activity>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

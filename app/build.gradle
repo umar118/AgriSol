@@ -42,11 +42,10 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
 
 
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
-    //implementation 'com.google.android.gms:play-services:17.0.0'
-
     implementation 'com.google.firebase:firebase-analytics:17.6.0'
     implementation 'com.google.firebase:firebase-auth:19.4.0'
     implementation 'com.google.firebase:firebase-database:19.5.0'
@@ -71,4 +70,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:20.3.0'
     implementation 'com.google.android.gms:play-services-vision-image-label:18.1.0'
 
+    implementation 'com.google.firebase:firebase-ml-natural-language:22.0.1'
+    implementation 'com.google.firebase:firebase-ml-natural-language-translate-model:20.0.9'
+    implementation 'com.google.firebase:firebase-ml-natural-language-language-id-model:20.0.8'
 }

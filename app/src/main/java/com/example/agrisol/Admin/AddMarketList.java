@@ -1,67 +1,125 @@
 package com.example.agrisol.Admin;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import com.example.agrisol.Market.Market;
 import com.example.agrisol.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
+import java.util.Calendar;
 
 public class AddMarketList extends AppCompatActivity {
 
+    private DatePicker datePicker;
+    private Calendar calendar;
+    private int year, month, day;
 
-    private EditText CropName,CropPrice,CropDistrict,CurrentDate;
+    private EditText CropName, CropPrice, CropDistrict ;
+    private TextView CurrentDate;
     private DatabaseReference PriceRef;
     private ProgressDialog loadingBar;
     private CardView AddCrop;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_market_list);
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.add_market_list );
 
-        CropName = findViewById(R.id.Edit_CropName);
-        CropPrice =findViewById(R.id.Edit_price);
-        CropDistrict =findViewById(R.id.Edit_district);
-        CurrentDate =findViewById(R.id.Edit_current_date);
+        CropName = findViewById( R.id.Edit_CropName );
+        CropPrice = findViewById( R.id.Edit_price );
+        CropDistrict = findViewById( R.id.Edit_district );
+        CurrentDate = findViewById( R.id.Edit_current_date );
+        PriceRef = FirebaseDatabase.getInstance().getReference( "Market_Rate" );
 
-        AddCrop =findViewById(R.id.Add_List);
-        AddCrop.setOnClickListener(new View.OnClickListener() {
+        AddCrop = findViewById( R.id.Add_List );
+        AddCrop.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-AddList();
+                AddList();
             }
-        });
+        } );
 
 
-        PriceRef = FirebaseDatabase.getInstance().getReference().child("Market Rate").push();
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Add Crop's Price");
+        Toolbar toolbar = findViewById( R.id.toolbar );
+        setSupportActionBar( toolbar );
+        getSupportActionBar().setDisplayShowTitleEnabled( false );
+        TextView mTitle = toolbar.findViewById( R.id.toolbar_title );
+        mTitle.setText( "Add Market Item" );
+        getSupportActionBar().setDisplayHomeAsUpEnabled( true );
+        getSupportActionBar().setDisplayShowHomeEnabled( true );
+        toolbar.setNavigationOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity( new Intent( getApplicationContext(), AdminDashboard.class ) );
+                finish();
+            }
+        } );
 
-        loadingBar= new ProgressDialog(this);
-        mAuth = FirebaseAuth.getInstance();
+        loadingBar = new ProgressDialog( this );
+
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        showDate(year, month+1, day);
+
+
+
 
     }
+
+    @SuppressWarnings("deprecation")
+    public void setDate(View view) {
+        showDialog(999);
+        Toast.makeText(getApplicationContext(), "ca",
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+    @Override
+    protected Dialog onCreateDialog(int id) {
+
+        if (id == 999) {
+            return new DatePickerDialog(this,
+                    myDateListener, year, month, day);
+        }
+        return null;
+    }
+    private DatePickerDialog.OnDateSetListener myDateListener = new
+            DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker arg0,
+                                      int arg1, int arg2, int arg3) {
+                    // TODO Auto-generated method stub
+                    // arg1 = year
+                    // arg2 = month
+                    // arg3 = day
+                    showDate(arg1, arg2+1, arg3);
+                }
+            };
+
+    private void showDate(int year, int month, int day) {
+        CurrentDate.setText(new StringBuilder().append(day).append("/")
+                .append(month).append("/").append(year));
+    }
+
+
+
 
     private void AddList() {
 
@@ -70,56 +128,65 @@ AddList();
         final String Crop_District = CropDistrict.getText().toString().trim();
         final String Crop_Date = CurrentDate.getText().toString().trim();
 
-        if (TextUtils.isEmpty(Crop_Name)) {
-            Toast.makeText(AddMarketList.this, "Please Write Crop's Name", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(Crop_Price)) {
-            Toast.makeText(AddMarketList.this, "Please Write Crop's Price", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(Crop_District)) {
-            Toast.makeText(AddMarketList.this, "Please Write District", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(Crop_Date)) {
-            Toast.makeText(AddMarketList.this, "Please Write Date", Toast.LENGTH_SHORT).show();
-        }
-        else
-
-        {
-            loadingBar.setTitle("Saving Information");
-            loadingBar.setMessage("wait for adding data...");
+        if (TextUtils.isEmpty( Crop_Name )) {
+           CropName.setError( "Please Enter Crop's Name" );
+        } else if (TextUtils.isEmpty( Crop_Price )) {
+            CropPrice.setError( "Please Enter Price" );
+        } else if (TextUtils.isEmpty( Crop_District )) {
+           CropDistrict.setError( "Please Enter District" );
+        } else if (TextUtils.isEmpty( Crop_Date )) {
+            Toast.makeText( AddMarketList.this, "Please Write Date", Toast.LENGTH_SHORT ).show();
+        } else {
+            loadingBar.setTitle( "Saving Information" );
+            loadingBar.setMessage( "wait for adding data..." );
             loadingBar.show();
-            loadingBar.setCanceledOnTouchOutside(true);
+            loadingBar.setCanceledOnTouchOutside( true );
 
-            HashMap crop_map = new HashMap();
-            crop_map.put("CropName", Crop_Name);
-            crop_map.put("CropPrice", Crop_Price);
-            crop_map.put("CropDistrict", Crop_District);
-            crop_map.put("Current_Date",Crop_Date);
+            String id = PriceRef.push().getKey();
+            Log.d( "IdddddddddD", "AddList: "+id );
 
-            PriceRef.updateChildren(crop_map).addOnCompleteListener(new OnCompleteListener() {
+            Market market = new Market( Crop_Name, Crop_Price, Crop_District, Crop_Date, id );
+            PriceRef.child( id ).setValue( market );
+            Toast.makeText( this, "Data Saved !", Toast.LENGTH_SHORT ).show();
+            loadingBar.dismiss();
+                Clear();
+                startActivity(  new Intent( getApplicationContext(),AdminDashboard.class ) );
+                finish();
+          /*  HashMap crop_map = new HashMap();
+            crop_map.put( "CropName", Crop_Name );
+            crop_map.put( "CropPrice", Crop_Price );
+            crop_map.put( "CropDistrict", Crop_District );
+            crop_map.put( "Current_Date", Crop_Date );
+            crop_map.put( "id", id );
+
+            PriceRef.updateChildren( crop_map ).addOnCompleteListener( new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if (task.isSuccessful()) {
 
-                        Toast.makeText(AddMarketList.this, "your data add successfully", Toast.LENGTH_LONG).show();
+                        Toast.makeText( AddMarketList.this, "your data add successfully", Toast.LENGTH_LONG ).show();
                         loadingBar.dismiss();
                         Clear();
-                        startActivity(new Intent(getApplicationContext(), AdminDashboard.class));
+                        startActivity( new Intent( getApplicationContext(), AdminDashboard.class ) );
                         finish();
 
                     } else {
                         String message = task.getException().getMessage();
-                        Toast.makeText(AddMarketList.this, "Error occured: " + message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText( AddMarketList.this, "Error occured: " + message, Toast.LENGTH_SHORT ).show();
                         loadingBar.dismiss();
                     }
 
                 }
-            });
+            } );*/
+
+
         }
     }
 
-public void Clear(){
+    public void Clear() {
         CropName.getText().clear();
         CropPrice.getText().clear();
         CropDistrict.getText().clear();
-}
+    }
 
 }

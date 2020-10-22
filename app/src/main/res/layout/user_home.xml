@@ -6,13 +6,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/White"
     tools:context=".User.UserHome">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_gravity="top|center"
+        android:gravity="top|center"
         android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@color/Green_Apple"
+            android:textColor="@color/White"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="Tomato Plant Leaf Classification"
+            >
+
+        </TextView>
 
         <ImageView
             android:id="@+id/imageView"
@@ -25,14 +40,31 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/border"
             android:baselineAligned="false"
+            android:textSize="17sp"
             android:gravity="center"
-             />
+            android:enabled="true"
+            android:scrollbars="vertical"
 
+             />
+        <TextView
+            android:id="@+id/soureText"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:baselineAligned="false"
+            android:textSize="17sp"
+            android:gravity="center"
+            android:enabled="true"
+            android:scrollbars="vertical"
+
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,7 +111,28 @@
                     android:textColor="@color/White"
                     android:text="Camera" />
             </androidx.cardview.widget.CardView>
-    </LinearLayout>
-    </LinearLayout>
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_margin="3dp"
+                app:cardBackgroundColor="@color/Green_Apple"
+                android:layout_gravity="center"
+                app:cardCornerRadius="7dp"
+                android:background="@color/Green_Apple"
+
+                >
+                <TextView
+                    android:id="@+id/translateData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:textColor="@color/White"
+                    android:text="Translate In Urdu" />
+            </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    </LinearLayout>
+</ScrollView>
 </FrameLayout>

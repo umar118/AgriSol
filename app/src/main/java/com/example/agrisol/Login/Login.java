@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +40,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.regex.Pattern;
+
 public class Login extends AppCompatActivity {
     TextView tvCreateNewAccount;
     EditText edtLoginEmail, edtLoginPassword;
@@ -56,6 +58,7 @@ public class Login extends AppCompatActivity {
     TextView forgetPassword;
     private AlertDialog alertDialog;
     private ImageView adminLogin;
+    private static final Pattern PASSWORD_PATTERN =Pattern.compile( "^"+"(?=.*[0-9])"+"(?=.*[a-zA-Z])"+"(?=\\S+$)"+".{6,}"+"$" );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,27 +82,13 @@ public class Login extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
         mTitle.setText("Login Here");
-
-
         mAuth = FirebaseAuth.getInstance();
-
-
-
-           // if (mAuth.getCurrentUser() != null) {
-             //     startActivity(new Intent(Login.this, UserDashboard.class));
-               //     finish();
-               //  }
-           // else    if (mAuth.getCurrentUser() != null) {
-           // startActivity(new Intent(Login.this, ExpertDashboard.class));
-           // finish();
-       // }
-         //   else {}
-
-
         final SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+
         firebaseAuthlistner = new FirebaseAuth.AuthStateListener() {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
                 if (user != null) {
                     category_val = prefs.getInt("Val", 0);
                     System.out.println("My Saved Id : " + category_val);
@@ -118,6 +107,7 @@ public class Login extends AppCompatActivity {
                 }
             }
         };
+
 
         initialize();
 
@@ -180,15 +170,28 @@ public class Login extends AppCompatActivity {
 
 
     @SuppressLint("ResourceType")
+
     private void allowingUserToLogin() {
+
         final String email = edtLoginEmail.getText().toString().trim();
-        String password = edtLoginPassword.getText().toString().trim();
+        final String password = edtLoginPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            edtLoginEmail.setError("Enter Email");
-        } else if (TextUtils.isEmpty(password)) {
-            edtLoginPassword.setError("Enter Password");
-        } else if (radioGroup.getCheckedRadioButtonId() <= 0) {
+            edtLoginEmail.setError("Please Enter Email");
+        }
+        else if(!Patterns.EMAIL_ADDRESS.matcher( email ).matches()){
+            edtLoginEmail.setError( "Please Enter Valid Email" );
+        }
+
+        else if (TextUtils.isEmpty(password)) {
+            edtLoginPassword.setError("Please Enter Password");
+        }
+        else if(!PASSWORD_PATTERN.matcher( password ).matches()){
+            edtLoginPassword.setError( "Weak Password" );
+        }
+        else if (radioGroup.getCheckedRadioButtonId() <= 0) {
+            Snackbar snackbar = Snackbar.make(coordinatorLayout,"Please Select Account",Snackbar.LENGTH_SHORT);
+            snackbar.show();
             radiobtnExpert.setError("Select item please");
         } else {
             loadingBar.setTitle("Logging In");
@@ -206,16 +209,17 @@ public class Login extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.exists()) {
-                                        Snackbar snackbar = Snackbar.make(coordinatorLayout,"Login Successfully",Snackbar.LENGTH_SHORT);
-                                        snackbar.show();
                                         loadingBar.dismiss();
                                         edtLoginEmail.setText("");
                                         edtLoginPassword.setText("");
-                                        Intent intent = new Intent(getApplicationContext(), UserDashboard.class);
-                                        startActivity(intent);
-                                        finish();
+                                        SendToUserDashboard();
+                                        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                        editor.putString("User", "done");
+                                        editor.apply();
+
                                     } else {
-                                        Toast.makeText(Login.this, "This email doesnot exist in this category", Toast.LENGTH_SHORT).show();
+                                        Snackbar snackbar = Snackbar.make(coordinatorLayout,"This Email Does Not Exist In This Category ",Snackbar.LENGTH_SHORT);
+                                        snackbar.show();
                                         loadingBar.dismiss();
                                     }
                                 }
@@ -235,24 +239,28 @@ public class Login extends AppCompatActivity {
                                         loadingBar.dismiss();
                                         edtLoginEmail.setText("");
                                         edtLoginPassword.setText("");
-                                        Intent intent = new Intent(getApplicationContext(), ExpertDashboard.class);
-                                        startActivity(intent);
-                                        finish();
+                                       SendToExpertDashboard();
+                                        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                        editor.putString("Expert", "done");
+                                        editor.apply();
                                     } else {
-                                        Toast.makeText(Login.this, "This email doesnot exist in this category", Toast.LENGTH_SHORT).show();
+                                        Snackbar snackbar = Snackbar.make(coordinatorLayout,"This Email Does Not Exist In This Category ",Snackbar.LENGTH_SHORT);
+                                        snackbar.show();
                                         loadingBar.dismiss();
                                     }
                                 }
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                                    Snackbar snackbar = Snackbar.make(coordinatorLayout,"DataBase Error:  "+databaseError,Snackbar.LENGTH_SHORT);
+                                    snackbar.show();
                                 }
                             });
                         }
                     } else {
                         String message = task.getException().getMessage();
-                        Toast.makeText(Login.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                        Snackbar snackbar = Snackbar.make(coordinatorLayout,"Error: "+message,Snackbar.LENGTH_SHORT);
+                        snackbar.show();
                         loadingBar.dismiss();
                     }
                 }
@@ -263,7 +271,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //mAuth.addAuthStateListener(firebaseAuthlistner);
+        mAuth.addAuthStateListener(firebaseAuthlistner);
     }
 
     @Override
@@ -284,6 +292,18 @@ public class Login extends AppCompatActivity {
     public void PasswordForget(View view){
         TextView pass =findViewById(R.id.forgetPass);
         startActivity(new Intent(Login.this, ResetPassword.class));
+        finish();
+    }
+
+    private void SendToUserDashboard(){
+        Intent intent = new Intent(getApplicationContext(), UserDashboard.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private  void SendToExpertDashboard(){
+        Intent intent = new Intent(getApplicationContext(), ExpertDashboard.class);
+        startActivity(intent);
         finish();
     }
 }

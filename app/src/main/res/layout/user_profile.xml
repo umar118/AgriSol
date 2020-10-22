@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
                 android:layout_margin="5dp"
-                android:src="@drawable/update"
+                android:src="@drawable/updatepro"
                 app:maxImageSize="30dp"
                 app:backgroundTint="@color/White"
                 app:layout_behavior="com.codepath.floatingactionbuttontest.ScrollAwareFABBehavior"
