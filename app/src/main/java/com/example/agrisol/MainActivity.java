@@ -1,5 +1,6 @@
 package com.example.agrisol;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,23 +9,36 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.ml.common.FirebaseMLException;
 import com.google.firebase.ml.common.modeldownload.FirebaseModelDownloadConditions;
 import com.google.firebase.ml.naturallanguage.FirebaseNaturalLanguage;
 import com.google.firebase.ml.naturallanguage.languageid.FirebaseLanguageIdentification;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslateLanguage;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslator;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslatorOptions;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.automl.FirebaseAutoMLLocalModel;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabeler;
+import com.google.firebase.ml.vision.label.FirebaseVisionOnDeviceAutoMLImageLabelerOptions;
+
+import java.io.IOException;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity{
 
-  private   ImageView imageView;
+    private static final String TAG = null;
+    private   ImageView imageView;
   private   TextView resultTV;
-  private    Button choose;
+  private    Button camera,Ref;
   private FirebaseVisionImageLabeler labeler;
 
 
@@ -40,11 +54,8 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         mSourceLang = findViewById(R.id.soureText);
-        mSourcetext = findViewById(R.id.Edit_translate);
         mTranslateBtn = findViewById(R.id.translate);
         mTranslatedText = findViewById(R.id.translate_text);
-
-
         mTranslateBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,12 +63,19 @@ public class MainActivity extends AppCompatActivity{
             }
         } );
 
-
-        /*
         imageView = findViewById( R.id.resultShow );
         resultTV = findViewById( R.id.resultText );
-        choose = findViewById( R.id.Capture );
-        choose.setOnClickListener( new View.OnClickListener() {
+        camera = findViewById( R.id.Capture );
+        Ref = findViewById( R.id.refresh );
+
+        Ref.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Refresh();
+            }
+        } );
+
+        camera.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(  );
@@ -76,7 +94,7 @@ public class MainActivity extends AppCompatActivity{
         try {
             //noinspection deprecation
             FirebaseVisionOnDeviceAutoMLImageLabelerOptions options = new FirebaseVisionOnDeviceAutoMLImageLabelerOptions.Builder( localModel )
-                    .setConfidenceThreshold( 0.05f )  // Evaluate your model in the Firebase console
+                    .setConfidenceThreshold( 0.5f )  // Evaluate your model in the Firebase console
                     // to determine an appropriate value.
                     .build();
             //noinspection deprecation
@@ -84,16 +102,16 @@ public class MainActivity extends AppCompatActivity{
         } catch (FirebaseMLException e) {
             // ...
         }
-*/
+
     }
-/*
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable final Intent data) {
         super.onActivityResult( requestCode, resultCode, data );
         if(requestCode==121){
             imageView.setImageURI( data.getData() );
 
-            FirebaseVisionImage image;
+            final FirebaseVisionImage image;
             try {
                 image = FirebaseVisionImage.fromFilePath(getApplicationContext(), data.getData());
 
@@ -101,20 +119,20 @@ public class MainActivity extends AppCompatActivity{
                         .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionImageLabel>>() {
                             @Override
                             public void onSuccess(List<FirebaseVisionImageLabel> labels) {
-                                // Task completed successfully
-                                // ...
-                                for (FirebaseVisionImageLabel label: labels) {
-                                    String text = label.getText();
-                                    float confidence =  label.getConfidence();
-                                    resultTV.append( text+" = "+""+confidence+"\n" );
+
+                                    for (FirebaseVisionImageLabel label : labels) {
+                                        String text = label.getText();
+                                        float confidence = label.getConfidence();
+                                        resultTV.append( text + "\n"+" = "+" "+ confidence + "\n" );
+
                                 }
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                // Task failed with an exception
-                                // ...
+                                resultTV.append( e.getMessage() );
+
                             }
                         });
 
@@ -124,10 +142,10 @@ public class MainActivity extends AppCompatActivity{
 
         }
     }
-*/
+
 
     private void identifyLanguage() {
-        sourceText = mSourcetext.getText().toString();
+        sourceText = resultTV.getText().toString();
 
         FirebaseLanguageIdentification identifier = FirebaseNaturalLanguage.getInstance()
                 .getLanguageIdentification();
@@ -161,7 +179,7 @@ public class MainActivity extends AppCompatActivity{
                 break;
             case "en":
                 langCode = FirebaseTranslateLanguage.EN;
-                mSourceLang.setText("English");
+                mSourceLang.setText("In Urdu");
 
                 break;
             default:
@@ -198,6 +216,12 @@ public class MainActivity extends AppCompatActivity{
                 });
             }
         });
+    }
+
+
+    private  void  Refresh(){
+        startActivity( new Intent( getApplicationContext(),MainActivity.class) );
+        finish();
     }
 
 }

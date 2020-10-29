@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".User.PostCommunity.Community">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:gravity="right|center">
+      <androidx.cardview.widget.CardView
+          android:id="@+id/Ask"
+          app:cardCornerRadius="10dp"
+          android:layout_width="100dp"
+          android:layout_gravity="center|left"
+        app:cardBackgroundColor="@color/Green_Apple"
+          android:layout_margin="3dp"
+          android:gravity="center|right"
+          android:layout_height="60dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="3dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/ask_community"
+            android:textColor="@color/White"
+
+            />
+      </androidx.cardview.widget.CardView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+</FrameLayout>

@@ -1,4 +1,4 @@
-package com.example.agrisol.User;
+package com.example.agrisol.User.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.agrisol.R;
+import com.example.agrisol.User.UpdateUserProfile;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

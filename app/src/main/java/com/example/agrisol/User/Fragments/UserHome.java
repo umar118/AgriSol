@@ -1,4 +1,4 @@
-package com.example.agrisol.User;
+package com.example.agrisol.User.Fragments;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -39,9 +39,9 @@ public class UserHome extends Fragment {
 
 
 ImageView imageView;
-TextView choose,cam,translate,mSourceLang;
+TextView choose,cam,translateUrdu,translateEnglish,mSourceLang;
 TextView resultText;
-private String sourceText;
+private String sourceText,sourceText2;
 FirebaseVisionImageLabeler labeler;
     static final int CAMERA_REQUEST = 123;
 
@@ -56,18 +56,24 @@ FirebaseVisionImageLabeler labeler;
         super.onActivityCreated(savedInstanceState);
 
         imageView = getView().findViewById( R.id.imageView );
-        mSourceLang = getView().findViewById(R.id.soureText);
         choose = getView().findViewById( R.id.capture );
         resultText = getView().findViewById( R.id.textView );
         cam = getView().findViewById( R.id.camera );
-        translate = getView().findViewById( R.id.translateData );
-        translate.setOnClickListener( new View.OnClickListener() {
+        translateUrdu = getView().findViewById( R.id.translateUrdu );
+        translateUrdu.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               identifyLanguage();
             }
         } );
 
+        translateEnglish = getView().findViewById( R.id.translateEnglish );
+        translateEnglish.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                identifyLanguage2();
+            }
+        } );
 
         //noinspection deprecation
         FirebaseAutoMLLocalModel localModel = new FirebaseAutoMLLocalModel.Builder()
@@ -175,6 +181,51 @@ FirebaseVisionImageLabeler labeler;
         }
     }
 
+
+    private void identifyLanguage() {
+        sourceText = resultText.getText().toString();
+
+        FirebaseLanguageIdentification identifier = FirebaseNaturalLanguage.getInstance()
+                .getLanguageIdentification();
+
+        // mSourceLang.setText("Detecting..");
+        identifier.identifyLanguage(sourceText).addOnSuccessListener(new OnSuccessListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                if (s.equals("und")){
+                    Toast.makeText(getContext(),"Language Not Identified",Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    getLanguageCode(s);
+                }
+            }
+        });
+    }
+
+    private void identifyLanguage2() {
+        sourceText2 = resultText.getText().toString();
+
+        FirebaseLanguageIdentification identifier = FirebaseNaturalLanguage.getInstance()
+                .getLanguageIdentification();
+
+        // mSourceLang.setText("Detecting..");
+        identifier.identifyLanguage(sourceText2).addOnSuccessListener(new OnSuccessListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                if (s.equals("mnd")){
+                    Toast.makeText(getContext(),"Language Not Identified",Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    getLanguageCodeUrdu(s);
+                }
+            }
+        });
+    }
+
+
+
     private void translateText(int langCode) {
         resultText.setText("Translating..");
         FirebaseTranslatorOptions options = new FirebaseTranslatorOptions.Builder()
@@ -202,34 +253,40 @@ FirebaseVisionImageLabeler labeler;
         });
     }
 
-    private void identifyLanguage() {
-        sourceText = resultText.getText().toString();
+    private void translateTextEnglish(int lanCode) {
+        resultText.setText("Translating..");
+        FirebaseTranslatorOptions options = new FirebaseTranslatorOptions.Builder()
+                //from language
+                .setSourceLanguage(lanCode)
+                // to language
+                .setTargetLanguage( FirebaseTranslateLanguage.EN)
+                .build();
 
-        FirebaseLanguageIdentification identifier = FirebaseNaturalLanguage.getInstance()
-                .getLanguageIdentification();
+        final FirebaseTranslator translator = FirebaseNaturalLanguage.getInstance()
+                .getTranslator(options);
 
-       // mSourceLang.setText("Detecting..");
-        identifier.identifyLanguage(sourceText).addOnSuccessListener(new OnSuccessListener<String>() {
+        FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
+                .build();
+        translator.downloadModelIfNeeded(conditions).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onSuccess(String s) {
-                if (s.equals("und")){
-                    Toast.makeText(getContext(),"Language Not Identified",Toast.LENGTH_SHORT).show();
-
-                }
-                else {
-                    getLanguageCode(s);
-                }
+            public void onSuccess(Void aVoid) {
+                translator.translate(sourceText2).addOnSuccessListener(new OnSuccessListener<String>() {
+                    @Override
+                    public void onSuccess(String s) {
+                        resultText.setText(s);
+                    }
+                });
             }
         });
     }
+
+
     private void getLanguageCode(String language) {
         int langCode;
         switch (language){
             case "en":
                 langCode = FirebaseTranslateLanguage.EN;
-                mSourceLang.setText("English");
-
-                break;
+               // mSourceLang.setText("English");
             default:
                 langCode = 0;
         }
@@ -237,4 +294,16 @@ FirebaseVisionImageLabeler labeler;
         translateText(langCode);
     }
 
+    private void getLanguageCodeUrdu(String language) {
+        int lanCode;
+        switch (language){
+            case "ur":
+                lanCode = FirebaseTranslateLanguage.UR;
+               // mSourceLang.setText("Eng");
+            default:
+                lanCode = 56;
+        }
+
+        translateTextEnglish(lanCode);
+    }
 }

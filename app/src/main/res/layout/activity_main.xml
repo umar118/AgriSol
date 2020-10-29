@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
+
+    android:layout_gravity="top|center"
      android:id="@+id/activity_main"
     android:gravity="center"
     android:layout_weight="1"
@@ -12,12 +15,12 @@
     tools:context=".MainActivity">
 
 
-<!--
+
     <ImageView
     android:id="@+id/resultShow"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:src="@color/Green_Apple"
+    android:layout_height="300dp"
+    android:src="@drawable/logo"
     android:layout_gravity="top|center"
     android:layout_weight="1"
     android:layout_margin="3dp"
@@ -32,21 +35,56 @@
     android:textSize="17sp"
     android:layout_margin="3dp"
    />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_margin="3dp">
     <Button
         android:id="@+id/Capture"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:background="@color/Green_Apple"
-        android:text="Choose"
+        android:drawableTop="@drawable/nav_camera"
+        android:text="@string/camera"
         android:layout_margin="3dp"
         android:layout_gravity="center"
         android:textColor="@color/White"
        />
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@color/Green_Apple"
+        android:drawableTop="@drawable/nav_camera"
+        android:text="Refresh"
+        android:layout_margin="3dp"
+        android:layout_gravity="center"
+        android:textColor="@color/White"
+        />
 
->
-
-</LinearLayout/>
-<!-->
+        <Button
+            android:id="@+id/translate"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@color/Green_Apple"
+            android:text="Translate"
+            android:layout_margin="3dp"
+            android:layout_gravity="center"
+            android:textColor="@color/White"
+            />
+    </LinearLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="5dp"
+       android:background="@color/Water"
+       android:gravity="center"
+       android:layout_gravity="center"
+       android:orientation="vertical"
+       >
     <TextView
         android:id="@+id/soureText"
         android:hint="Detecting"
@@ -58,15 +96,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Edit_translate"/>
-    <Button
-        android:text="Translate"
-        android:id="@+id/translate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/translate_text"
         android:hint="Translated Text"
@@ -77,5 +106,7 @@
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+   </LinearLayout>
 
 </LinearLayout>
+</ScrollView>

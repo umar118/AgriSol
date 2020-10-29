@@ -15,9 +15,14 @@
 
 
     <item
-        android:id="@+id/navigation_market"
-        android:icon="@drawable/nav_market"
-        android:title="Market Rate" />
+    android:id="@+id/navigation_market"
+    android:icon="@drawable/nav_market"
+    android:title="Market Rate" />
+
+    <item
+        android:id="@+id/navigation_public"
+        android:icon="@drawable/nav_public"
+        android:title="Community" />
 
     <item
         android:id="@+id/navigation_profile"

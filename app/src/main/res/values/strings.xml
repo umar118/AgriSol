@@ -67,5 +67,13 @@
     <string name="s">:</string>
 
     <string name="tomato_early_blight">ٹماٹر ابتدائی فرسودہ</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="urdu">Urdu</string>
+    <string name="english">English</string>
+    <string name="ask_community">Ask Community ?</string>
+    <string name="username____">Username :</string>
+    <string name="title">Title :</string>
+    <string name="__name">Name :</string>
 
 </resources>

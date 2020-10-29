@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChatSystem.ChatBox"></activity>
+        <activity android:name=".User.PostCommunity.CommentsActivity"></activity>
+        <activity android:name=".User.PostCommunity.PsotActivity" />
+        <activity android:name=".ChatSystem.ChatBox" />
         <activity android:name=".Admin.Home" />
         <activity android:name=".Market.UpdatePrice" />
         <activity android:name=".Market.UpdateMarketList" />
@@ -23,7 +25,7 @@
         <activity android:name=".Admin.AdminDashboard" />
         <activity android:name=".Admin.CreateAdminAccount" />
         <activity android:name=".Admin.AdminLogin" />
-        <activity android:name=".Admin.AddMarketList"></activity>
+        <activity android:name=".Admin.AddMarketList" />
         <activity android:name=".Expert.UpdateExpertProfile" />
         <activity android:name=".Expert.ExpertSetting" />
         <activity android:name=".User.UpdateUserProfile" />
@@ -45,9 +47,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".User.UserDashboard" />
-        <activity android:name=".MainActivity" >
-
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

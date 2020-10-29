@@ -22,7 +22,8 @@ import com.example.agrisol.Login.DeleteAccountDailogFragment;
 import com.example.agrisol.Login.Login;
 import com.example.agrisol.Market.MarketPriceList;
 import com.example.agrisol.R;
-import com.example.agrisol.User.UserHome;
+import com.example.agrisol.User.PostCommunity.Community;
+import com.example.agrisol.User.Fragments.UserHome;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -148,7 +149,9 @@ public class ExpertDashboard extends AppCompatActivity  implements NavigationVie
                 case R.id.navigation_market:
                     fragment = new MarketPriceList();
                     break;
-
+                case R.id.navigation_public:
+                    fragment =new Community();
+                    break;
                 case R.id.navigation_profile:
                     fragment = new ExpertProfile();
                     break;
