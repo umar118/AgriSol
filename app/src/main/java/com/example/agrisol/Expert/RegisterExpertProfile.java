@@ -43,7 +43,7 @@ public class RegisterExpertProfile extends AppCompatActivity {
     private EditText ExpertFullName, ExpertEmail,ExpertCity, ExpertProvince,ExpertCountry,ExpertQualification,ExpertMobile,ExpertExperties;
     private FirebaseAuth mAuth;
     private CircleImageView ExpertProfile;
-    private DatabaseReference UsersRef;
+    private DatabaseReference ExpertRef;
     private ProgressDialog loadingBar;
     String currentExpertID;
     private StorageReference ExpertProfileImageRef;
@@ -63,7 +63,7 @@ public class RegisterExpertProfile extends AppCompatActivity {
         loadingBar= new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser expert = FirebaseAuth.getInstance().getCurrentUser();
-        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Expert").child(expert.getUid());
+        ExpertRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Expert").child(expert.getUid());
 
         ExpertProfileImageRef = FirebaseStorage.getInstance().getReference().child("Expert Profile Images").child(expert.getUid());;
 
@@ -98,15 +98,15 @@ public class RegisterExpertProfile extends AppCompatActivity {
             }
         });
 
-        UsersRef.addValueEventListener(new ValueEventListener() {
+        ExpertRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
                 if(dataSnapshot.exists())
                 {
-                    if (dataSnapshot.hasChild("expertprofileimage"))
+                    if (dataSnapshot.hasChild("expert_Profile"))
                     {
-                        String image = dataSnapshot.child("expertprofileimage").getValue().toString();
+                        String image = dataSnapshot.child("expert_Profile").getValue().toString();
                         Picasso.get().load(image).placeholder(R.drawable.profile).into(ExpertProfile);
                     }
                     else
@@ -163,7 +163,7 @@ public class RegisterExpertProfile extends AppCompatActivity {
                             Uri downUri = task.getResult();
                             Toast.makeText(RegisterExpertProfile.this, "Profile Image stored successfully to Firebase storage...", Toast.LENGTH_SHORT).show();
                             final String downloadUrl = downUri.toString();
-                            UsersRef.child("expertprofileimage").setValue(downloadUrl)
+                            ExpertRef.child("expert_Profile").setValue(downloadUrl)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
 
                                         @Override
@@ -193,7 +193,7 @@ public class RegisterExpertProfile extends AppCompatActivity {
     }
     public void CreateExpert() {
 
-        final String Expert_Fullname = ExpertFullName.getText().toString().trim();
+        final String Expert_FullName = ExpertFullName.getText().toString().trim();
         final String Expert_Email = ExpertEmail.getText().toString().trim();
         final String Expert_MobileNo = ExpertMobile.getText().toString().trim();
         final String Expert_Qualification = ExpertQualification.getText().toString().trim();
@@ -203,7 +203,10 @@ public class RegisterExpertProfile extends AppCompatActivity {
         final String Expert_Experties = ExpertExperties.getText().toString().trim();
 
 
-        if (TextUtils.isEmpty(Expert_Fullname)) {
+        if(ExpertProfile !=null){
+            Toast.makeText( getApplicationContext(),"Please Select Image",Toast.LENGTH_SHORT ).show();
+        }
+        if (TextUtils.isEmpty(Expert_FullName)) {
            ExpertFullName.setError( "Enter Name" );
         } else if (TextUtils.isEmpty(Expert_Email)) {
             ExpertEmail.setError( "Enter Registered Email Address" );
@@ -236,37 +239,30 @@ public class RegisterExpertProfile extends AppCompatActivity {
             loadingBar.show();
             loadingBar.setCanceledOnTouchOutside(true);
 
-           // mAuth = FirebaseAuth.getInstance();
-           // UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Expert");
-          //  Experts experts;
-          //  experts = new Experts(Expert_Fullname,Expert_Email,Expert_MobileNo,Expert_Qualification,Expert_City,Expert_Province,Expert_Country,Expert_Experties,mAuth.getCurrentUser().getUid());
-         //   String current_user = mAuth.getCurrentUser().getUid();
-         //   UsersRef.child( current_user ).setValue( experts );
 
-         HashMap expertMap = new HashMap();
-
-            expertMap.put("expert_FullName",Expert_Fullname);
+            HashMap expertMap = new HashMap();
+            expertMap.put("expert_FullName",Expert_FullName);
             expertMap.put("expert_Email",Expert_Email);
             expertMap.put("expert_MobileNo",Expert_MobileNo);
             expertMap.put("expert_Qualification",Expert_Qualification);
             expertMap.put("expert_City",Expert_City);
             expertMap.put("expert_Province",Expert_Province);
             expertMap.put("expert_Country",Expert_Country);
-            expertMap.put("expert_Experties",Expert_Experties);
+            expertMap.put("expert_Expertise",Expert_Experties);
 
-            SendToExpertDashboard();
+
             loadingBar.dismiss();
             loadingBar.setMessage("Creating Your Account");
             loadingBar.show();
 
-           UsersRef.updateChildren(expertMap).addOnCompleteListener(new OnCompleteListener() {
+           ExpertRef.updateChildren(expertMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if (task.isSuccessful()) {
 
-                        Toast.makeText(RegisterExpertProfile.this, "Account Created Succesfully.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterExpertProfile.this, "Account Created Successfully.", Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
-                        startActivity(new Intent(getApplicationContext(), ExpertDashboard.class));
+                        SendToExpertDashboard();
                         finish();
                     } else {
                         String message = task.getException().getMessage();

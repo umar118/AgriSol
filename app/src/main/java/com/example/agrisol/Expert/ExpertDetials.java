@@ -46,6 +46,7 @@ public class ExpertDetials extends Fragment {
 
 
         expertsList = new ArrayList<Experts>();
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
         //  addTaskBox = (EditText) findViewById(R.id.add_task_box);
 
@@ -55,7 +56,7 @@ public class ExpertDetials extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         GetData();
-        ExpertDate();
+       // ExpertDate();
 
     }
 
@@ -67,16 +68,16 @@ public class ExpertDetials extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Experts experts = new Experts();
-                    experts.setProfile(snapshot.child("expertprofileimage").getValue().toString());
+                    Experts experts = new Experts(  );
+                    experts.setProfile(snapshot.child("expert_Profile").getValue().toString());
                     experts.setExpert_Fullname(snapshot.child("expert_FullName").getValue().toString());
-                    experts.setExpert_Email(snapshot.child("expert_Email").getValue().toString());
-                    experts.setExpert_Contact(snapshot.child("expert_MobileNo").getValue().toString());
+                   experts.setExpert_Email(snapshot.child("expert_Email").getValue().toString());
+                   experts.setExpert_Contact(snapshot.child("expert_MobileNo").getValue().toString());
                     experts.setExpert_Qualification(snapshot.child("expert_Qualification").getValue().toString());
                     experts.setExpert_City(snapshot.child("expert_City").getValue().toString());
                     experts.setExpert_Province(snapshot.child("expert_Province").getValue().toString());
                     experts.setExpert_Country(snapshot.child("expert_Country").getValue().toString());
-                    experts.setExpert_Experties(snapshot.child("expert_Experties").getValue().toString());
+                    experts.setExpert_Experties(snapshot.child("expert_Expertise").getValue().toString());
 
                     expertsList.add(experts);
 

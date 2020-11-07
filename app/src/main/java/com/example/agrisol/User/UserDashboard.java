@@ -23,7 +23,6 @@ import com.example.agrisol.Login.DeleteAccountDailogFragment;
 import com.example.agrisol.Login.Login;
 import com.example.agrisol.Market.MarketPriceList;
 import com.example.agrisol.R;
-import com.example.agrisol.User.PostCommunity.Community;
 import com.example.agrisol.User.Fragments.UserHome;
 import com.example.agrisol.User.Fragments.UserProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -112,10 +111,6 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
                     fragment = new MarketPriceList();
                     break;
 
-                case R.id.navigation_public:
-                    fragment =new Community();
-                    break;
-
                 case R.id.navigation_profile:
                     fragment = new UserProfile();
                     break;
@@ -150,6 +145,8 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
                    startActivity(new Intent(getApplicationContext(), UpdateUserProfile.class));
                    finish();
                     break;
+
+
                 case  R.id.nav_signout:
                     mAuth.signOut();
                     Toast.makeText(getApplicationContext(),"Sign out Successfully",Toast.LENGTH_SHORT).show();
@@ -163,7 +160,8 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
                     break;
 
                 case R.id.nav_delete:
-                    DeleteAccount();
+                   startActivity( new Intent( getApplicationContext(),DeleteUserAccount.class ) );
+                   finish();
                     break;
                 case R.id.menu_about_us:
                     startActivity(new Intent(getApplicationContext(), AboutUs.class));
@@ -190,8 +188,8 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(UserDashboard.this, "User account deleted", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplication(),Login.class));
+                               startActivity( new Intent( getApplicationContext(),Login.class ) );
+                               finish();
                             }
                         }
                     });

@@ -61,7 +61,7 @@ public class RegisterUserProfile extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Create User Account");
+        mTitle.setText("Register Profile");
 
 
         loadingBar= new ProgressDialog(this);

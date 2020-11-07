@@ -104,7 +104,7 @@ public class UpdateExpertProfile extends AppCompatActivity {
 
                 if (dataSnapshot.exists()) {
 
-                    String image = dataSnapshot.child("expertprofileimage").getValue().toString();
+                    String image = dataSnapshot.child("expert_Profile").getValue().toString();
                     String expert_FullName = dataSnapshot.child("expert_FullName").getValue().toString();
                     String expert_Email = dataSnapshot.child("expert_Email").getValue().toString();
                     String expert_MobileNo = dataSnapshot.child("expert_MobileNo").getValue().toString();
@@ -112,7 +112,7 @@ public class UpdateExpertProfile extends AppCompatActivity {
                     String expert_Province = dataSnapshot.child("expert_Province").getValue().toString();
                     String expert_Country = dataSnapshot.child("expert_Country").getValue().toString();
                     String expert_Qualification = dataSnapshot.child("expert_Qualification").getValue().toString();
-                    String expert_Experties = dataSnapshot.child("expert_Experties").getValue().toString();
+                    String expert_Experties = dataSnapshot.child("expert_Expertise").getValue().toString();
 
                     ExpertFullName.setText(expert_FullName);
                     ExpertEmail.setText(expert_Email);
@@ -151,9 +151,9 @@ public class UpdateExpertProfile extends AppCompatActivity {
             {
                 if(dataSnapshot.exists())
                 {
-                    if (dataSnapshot.hasChild("expertprofileimage"))
+                    if (dataSnapshot.hasChild("expert_Profile"))
                     {
-                        String image = dataSnapshot.child("expertprofileimage").getValue().toString();
+                        String image = dataSnapshot.child("expert_Profile").getValue().toString();
                         Picasso.get().load(image).placeholder(R.drawable.profile).into(ProfileImage);
                     }
                     else
@@ -212,7 +212,7 @@ public class UpdateExpertProfile extends AppCompatActivity {
                             Uri downUri = task.getResult();
                             Toast.makeText(UpdateExpertProfile.this, "Profile Image stored successfully to Firebase storage...", Toast.LENGTH_SHORT).show();
                             final String downloadUrl = downUri.toString();
-                            ExpertRef.child("expertprofileimage").setValue(downloadUrl)
+                            ExpertRef.child("expert_Profile").setValue(downloadUrl)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
 
                                         @Override
@@ -293,7 +293,7 @@ public class UpdateExpertProfile extends AppCompatActivity {
             expertMap.put("expert_City",Expert_City);
             expertMap.put("expert_Province",Expert_Province);
             expertMap.put("expert_Country",Expert_Country);
-            expertMap.put("expert_Experties",Expert_Experties);
+            expertMap.put("expert_Expertise",Expert_Experties);
 
             loadingBar.dismiss();
             loadingBar.setMessage("Creating Your Account");

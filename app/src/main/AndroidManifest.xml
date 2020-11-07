@@ -15,9 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".User.PostCommunity.CommentsActivity"></activity>
-        <activity android:name=".User.PostCommunity.PsotActivity" />
-        <activity android:name=".ChatSystem.ChatBox" />
+        <activity android:name=".Expert.DeleteExpertAccount"></activity>
+        <activity android:name=".User.DeleteUserAccount" />
+
         <activity android:name=".Admin.Home" />
         <activity android:name=".Market.UpdatePrice" />
         <activity android:name=".Market.UpdateMarketList" />

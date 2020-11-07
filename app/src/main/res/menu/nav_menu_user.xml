@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+    <item android:title="@string/update_profile">
+        <menu>
+            <item
+                android:id="@+id/nav_update"
+                android:icon="@drawable/update_profile_icon"
+                android:title="@string/update_profile" />
+        </menu>
+
+    </item>
+    <item android:title="@string/sign_out">
+        <menu>
+            <item
+                android:id="@+id/nav_signout"
+                android:icon="@drawable/signout_icon"
+                android:title="@string/sign_out" />
+        </menu>
+    </item>
+
+    <item android:title="Delete Account">
+        <menu>
+            <item
+                android:id="@+id/nav_delete"
+                android:icon="@drawable/delete_icon"
+                android:title="@string/delete_account" />
+        </menu>
+    </item>
+
+    <item android:title="About Us">
+        <menu>
+            <item
+                android:title="About us"
+                android:id="@+id/menu_about_us"
+                android:icon="@drawable/nav_notifications"
+                />
+        </menu>
+    </item>
+</menu>

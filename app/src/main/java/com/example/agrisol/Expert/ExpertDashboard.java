@@ -22,7 +22,6 @@ import com.example.agrisol.Login.DeleteAccountDailogFragment;
 import com.example.agrisol.Login.Login;
 import com.example.agrisol.Market.MarketPriceList;
 import com.example.agrisol.R;
-import com.example.agrisol.User.PostCommunity.Community;
 import com.example.agrisol.User.Fragments.UserHome;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -149,9 +148,7 @@ public class ExpertDashboard extends AppCompatActivity  implements NavigationVie
                 case R.id.navigation_market:
                     fragment = new MarketPriceList();
                     break;
-                case R.id.navigation_public:
-                    fragment =new Community();
-                    break;
+
                 case R.id.navigation_profile:
                     fragment = new ExpertProfile();
                     break;
@@ -167,14 +164,14 @@ public class ExpertDashboard extends AppCompatActivity  implements NavigationVie
     private void  DrawableProfile(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Expert").child(user.getUid());
-        UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("User Profile Images");
+        UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Expert Profile Images");
         UsersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
-                    if (dataSnapshot.hasChild("expertprofileimage")) {
-                        String userprofileimage = dataSnapshot.child("expertprofileimage").getValue().toString();
+                    if (dataSnapshot.hasChild("expert_Profile")) {
+                        String userprofileimage = dataSnapshot.child("expert_Profile").getValue().toString();
                         Picasso.get().load(userprofileimage).placeholder(R.drawable.profile).into(ProfileImage);
                     }
                     if (dataSnapshot.hasChild("expert_FullName")) {
