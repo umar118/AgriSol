@@ -7,7 +7,7 @@
     android:background="@color/Green_Apple"
     android:id="@+id/coordinatorLayout"
     android:fitsSystemWindows="true"
-    tools:context=".Login.Login">
+    tools:context=".Login">
 
 
 <LinearLayout

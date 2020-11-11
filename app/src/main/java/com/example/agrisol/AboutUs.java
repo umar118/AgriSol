@@ -1,4 +1,4 @@
-package com.example.agrisol.Login;
+package com.example.agrisol;
 
 import android.os.Bundle;
 

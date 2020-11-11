@@ -15,9 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Expert.DeleteExpertAccount"></activity>
+        <activity android:name=".CommonHome"></activity>
+        <activity android:name=".Expert.DeleteExpertAccount" />
         <activity android:name=".User.DeleteUserAccount" />
-
         <activity android:name=".Admin.Home" />
         <activity android:name=".Market.UpdatePrice" />
         <activity android:name=".Market.UpdateMarketList" />
@@ -34,10 +34,10 @@
         <activity android:name=".User.CreateUserAccount" />
         <activity android:name=".Admin.AddExpertDetials" />
         <activity android:name=".Expert.ExpertDashboard" />
-        <activity android:name=".Login.ResetPassword" />
-        <activity android:name=".Login.Login" />
+        <activity android:name=".ResetPassword" />
+        <activity android:name=".Login" />
         <activity android:name=".User.RegisterUserProfile" />
-        <activity android:name=".Login.AboutUs" />
+        <activity android:name=".AboutUs" />
         <activity android:name=".User.Setting" />
         <activity android:name=".AplicationLogo">
             <intent-filter>

@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.agrisol.Login.Login;
+import com.example.agrisol.Login;
 import com.example.agrisol.R;
 import com.google.firebase.auth.FirebaseAuth;
 

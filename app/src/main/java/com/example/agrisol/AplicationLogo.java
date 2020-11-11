@@ -6,8 +6,6 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.agrisol.Login.Login;
-
 public class AplicationLogo extends AppCompatActivity {
     Handler handler;
     @Override
@@ -19,7 +17,7 @@ public class AplicationLogo extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent=new Intent(AplicationLogo.this, Login.class);
+                Intent intent=new Intent(AplicationLogo.this, CommonHome.class);
                 startActivity(intent);
                 finish();
             }

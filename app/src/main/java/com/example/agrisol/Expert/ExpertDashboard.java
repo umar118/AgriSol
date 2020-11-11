@@ -15,20 +15,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import com.example.agrisol.Login.AboutUs;
-import com.example.agrisol.Login.DeleteAccountDailogFragment;
-import com.example.agrisol.Login.Login;
+import com.example.agrisol.AboutUs;
+import com.example.agrisol.Login;
 import com.example.agrisol.Market.MarketPriceList;
 import com.example.agrisol.R;
 import com.example.agrisol.User.Fragments.UserHome;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -115,7 +109,8 @@ public class ExpertDashboard extends AppCompatActivity  implements NavigationVie
                 spreferencesEditor.commit();
                 break;
             case R.id.nav_delete:
-                DeleteAccount();
+                 startActivity( new Intent( getApplicationContext(),DeleteExpertAccount.class ));
+                 finish();
                 break;
             case R.id.menu_about_us:
                 startActivity(new Intent(getApplicationContext(), AboutUs.class));
@@ -190,27 +185,7 @@ public class ExpertDashboard extends AppCompatActivity  implements NavigationVie
         });
     }
 
-    private  void  DeleteAccount(){
-        final   FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        AuthCredential authCredential = EmailAuthProvider.getCredential("user@example.com", "password1234");
-        FragmentManager manager =getSupportFragmentManager();
-        DeleteAccountDailogFragment myDialogFragment =new DeleteAccountDailogFragment();
-        myDialogFragment.show(manager,"DeleteAccountDialogFragment");
-        firebaseUser.reauthenticate(authCredential).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText( getApplicationContext(), "User account deleted", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplication(),Login.class));
-                        }
-                    }
-                });
-            }
-        });
-    }
+
 
 
 }

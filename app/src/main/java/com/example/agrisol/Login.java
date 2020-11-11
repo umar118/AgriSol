@@ -1,4 +1,4 @@
-package com.example.agrisol.Login;
+package com.example.agrisol;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -25,7 +25,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.example.agrisol.Admin.AdminLogin;
 import com.example.agrisol.Expert.CreateExpertAccount;
 import com.example.agrisol.Expert.ExpertDashboard;
-import com.example.agrisol.R;
 import com.example.agrisol.User.CreateUserAccount;
 import com.example.agrisol.User.UserDashboard;
 import com.google.android.gms.tasks.OnCompleteListener;
