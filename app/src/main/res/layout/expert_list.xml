@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/expert_list_id"
-    android:background="@color/Milk_White"
+    android:background="@color/Sky_Blue"
     app:cardBackgroundColor="@color/Milk_White"
     android:layout_margin="3dp">
 
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         app:cardCornerRadius="3dp"
-        android:background="@color/White"
+        android:background="@color/Sea_Blue"
         app:cardBackgroundColor="@color/White"
         >
 
@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@color/Water"
             android:layout_margin="3dp"
             android:gravity="center"
             android:orientation="horizontal">

@@ -2,6 +2,7 @@ package com.example.agrisol.Admin;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -16,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.agrisol.MainActivity;
 import com.example.agrisol.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,6 +38,11 @@ public class AdminLogin extends AppCompatActivity {
     FirebaseAuth mAuth;
     ProgressDialog loadingBar;
     ImageView adminCreate;
+
+    private FirebaseAuth.AuthStateListener firebaseAuthlistner;
+    int category_val;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+
     private static final Pattern PASSWORD_PATTERN =Pattern.compile( "^"+"(?=.*[0-9])"+"(?=.*[a-zA-Z])"+"(?=\\S+$)"+".{6,}"+"$" );
 
     @Override
@@ -51,11 +56,24 @@ public class AdminLogin extends AppCompatActivity {
         TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
         mTitle.setText("Admin Login Here");
         mAuth = FirebaseAuth.getInstance();
+        final SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        firebaseAuthlistner = new FirebaseAuth.AuthStateListener() {
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(AdminLogin.this, AdminDashboard.class));
-            finish();
-        }
+                if (user != null) {
+                    category_val = prefs.getInt("Val", 0);
+                    System.out.println("My Saved Id : " + category_val);
+                    if (category_val == 1) {
+                        Intent intent = new Intent( getApplicationContext(), AdminDashboard.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    return;
+                }
+            }
+        };
 
         adminCreate =findViewById(R.id.admin_create);
         adminCreate.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +136,9 @@ public class AdminLogin extends AppCompatActivity {
                                                     adminEmail.setText("");
                                                     adminPassword.setText("");
                                                     SendUserToMainActivity();
+                                                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                                    editor.putString("Admin", "done");
+                                                    editor.apply();
                                                 } else {
                                                     Toast.makeText(AdminLogin.this, "This email doesnot exist in this category", Toast.LENGTH_SHORT).show();
                                                     loadingBar.dismiss();
@@ -153,27 +174,11 @@ public class AdminLogin extends AppCompatActivity {
 
     private void SendUserToMainActivity() {
 
-        Intent mainIntent = new Intent(AdminLogin.this, MainActivity.class);
+        Intent mainIntent = new Intent(AdminLogin.this, AdminDashboard.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
         finish();
 
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        if(currentUser != null)
-        {
-            Intent mainIntent = new Intent(AdminLogin.this,AdminDashboard.class);
-            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(mainIntent);
-            finish();
-        }
-    }
-
-
 
 }

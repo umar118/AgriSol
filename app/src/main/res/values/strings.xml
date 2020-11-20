@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AgriSol</string>
+    <string name="app_name">AgriSolutions</string>
     <string name="update_profile">Update Profile</string>
     <string name="sign_out">Sign Out</string>
     <string name="delete_account">Delete Account</string>
@@ -65,8 +65,6 @@
     <string name="ss">|</string>
     <string name="delete">Delete</string>
     <string name="s">:</string>
-
-    <string name="tomato_early_blight">ٹماٹر ابتدائی فرسودہ</string>
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
     <string name="urdu">Urdu</string>
@@ -75,5 +73,14 @@
     <string name="username____">Username :</string>
     <string name="title">Title :</string>
     <string name="__name">Name :</string>
+
+    <string name="about_application"> AgriSolutions is online mobile application. AgriSolutions turns your Android phone into mobile crop doctor with which you can accurately detect pests and diseases on crops in within seconds.    </string>
+    <string name="what_agrisolutions_offers">What AgriSolutions Offers</string>
+    <string name="treatment">Detect pests and diseases on crop and get recommended treatments</string>
+    <string name="experts_details____________">Experts Details:</string>
+    <string name="information">Information of experts are given. You can easily get information and contact them</string>
+    <string name="market_price_list________">Market Price List:</string>
+    <string name="market">All price of crops item are given. This activity only for Pakistan country because of all districts are in Pakistan.</string>
+
 
 </resources>

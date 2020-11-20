@@ -1,6 +1,8 @@
 package com.example.agrisol;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -130,6 +134,8 @@ public class CommonHome extends AppCompatActivity {
                 i.setType( "image/*" );
                 i.setAction( Intent.ACTION_GET_CONTENT );
                 startActivityForResult( Intent.createChooser( i,"Choose An Image" ),121 );
+
+
             }
         } );
 
@@ -138,7 +144,17 @@ public class CommonHome extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent  =new Intent( MediaStore.ACTION_IMAGE_CAPTURE );
-                startActivityForResult( intent,CAMERA_REQUEST);
+
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA ) != PackageManager.PERMISSION_GRANTED){
+                                requestPermission();
+
+                }
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE ) != PackageManager.PERMISSION_GRANTED){
+                    requestPermission2();
+                }
+                else {
+                    startActivityForResult( intent,CAMERA_REQUEST);
+                }
             }
         } );
 
@@ -151,6 +167,12 @@ public class CommonHome extends AppCompatActivity {
             }
         } );
 
+    }
+    private void requestPermission(){
+        ActivityCompat.requestPermissions(CommonHome.this,new String[]{Manifest.permission.CAMERA},CAMERA_REQUEST );
+    }
+    private void requestPermission2(){
+        ActivityCompat.requestPermissions(CommonHome.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},CAMERA_REQUEST );
     }
 
     @Override
@@ -240,28 +262,6 @@ public class CommonHome extends AppCompatActivity {
         });
     }
 
-    private void identifyLanguage2() {
-        sourceText2 = resultText.getText().toString();
-
-        FirebaseLanguageIdentification identifier = FirebaseNaturalLanguage.getInstance()
-                .getLanguageIdentification();
-
-        // mSourceLang.setText("Detecting..");
-        identifier.identifyLanguage(sourceText2).addOnSuccessListener(new OnSuccessListener<String>() {
-            @Override
-            public void onSuccess(String s) {
-                if (s.equals("mnd")){
-                    Toast.makeText(getApplicationContext(),"Language Not Identified",Toast.LENGTH_SHORT).show();
-
-                }
-                else {
-                    getLanguageCodeUrdu(s);
-                }
-            }
-        });
-    }
-
-
 
     private void translateText(int langCode) {
         resultText.setText("Translating..");
@@ -290,33 +290,6 @@ public class CommonHome extends AppCompatActivity {
         });
     }
 
-    private void translateTextEnglish(int lanCode) {
-        resultText.setText("Translating..");
-        FirebaseTranslatorOptions options = new FirebaseTranslatorOptions.Builder()
-                //from language
-                .setSourceLanguage(lanCode)
-                // to language
-                .setTargetLanguage( FirebaseTranslateLanguage.EN)
-                .build();
-
-        final FirebaseTranslator translator = FirebaseNaturalLanguage.getInstance()
-                .getTranslator(options);
-
-        FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
-                .build();
-        translator.downloadModelIfNeeded(conditions).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                translator.translate(sourceText2).addOnSuccessListener(new OnSuccessListener<String>() {
-                    @Override
-                    public void onSuccess(String s) {
-                        resultText.setText(s);
-                    }
-                });
-            }
-        });
-    }
-
 
     private void getLanguageCode(String language) {
         int langCode;
@@ -330,19 +303,5 @@ public class CommonHome extends AppCompatActivity {
 
         translateText(langCode);
     }
-
-    private void getLanguageCodeUrdu(String language) {
-        int lanCode;
-        switch (language){
-            case "ur":
-                lanCode = FirebaseTranslateLanguage.UR;
-                // mSourceLang.setText("Eng");
-            default:
-                lanCode = 56;
-        }
-
-        translateTextEnglish(lanCode);
-    }
-
 
 }

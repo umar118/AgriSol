@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 public class AddMarketList extends AppCompatActivity {
 
@@ -35,6 +36,9 @@ public class AddMarketList extends AppCompatActivity {
     private DatabaseReference PriceRef;
     private ProgressDialog loadingBar;
     private CardView AddCrop;
+
+    private static final Pattern TEXT_PATTERN =Pattern.compile( "([ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz])*");
+    private static final Pattern NUMBER_PATTERN =Pattern.compile( "([0123456789])*");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,11 +130,23 @@ public class AddMarketList extends AppCompatActivity {
 
         if (TextUtils.isEmpty( Crop_Name )) {
            CropName.setError( "Please Enter Crop's Name" );
-        } else if (TextUtils.isEmpty( Crop_Price )) {
+        }
+        else if (!TEXT_PATTERN.matcher( Crop_Name ).matches()){
+           CropName.setError( "Enter Only Text" );
+        }
+        else if (TextUtils.isEmpty( Crop_Price )) {
             CropPrice.setError( "Please Enter Price" );
-        } else if (TextUtils.isEmpty( Crop_District )) {
-           CropDistrict.setError( "Please Enter District" );
-        } else if (TextUtils.isEmpty( Crop_Date )) {
+        }
+        else if (!NUMBER_PATTERN.matcher( Crop_Price ).matches()){
+            CropPrice.setError( "Enter Only Number" );
+        }
+        else if (TextUtils.isEmpty( Crop_District )) {
+            CropDistrict.setError( "Please Enter District" );
+        }
+        else if (!TEXT_PATTERN.matcher( Crop_District ).matches()){
+            CropDistrict.setError( "Enter Only Text" );
+        }
+        else if (TextUtils.isEmpty( Crop_Date )) {
             Toast.makeText( AddMarketList.this, "Please Write Date", Toast.LENGTH_SHORT ).show();
         } else {
             loadingBar.setTitle( "Saving Information" );
@@ -148,33 +164,6 @@ public class AddMarketList extends AppCompatActivity {
                 Clear();
                 startActivity(  new Intent( getApplicationContext(),AdminDashboard.class ) );
                 finish();
-          /*  HashMap crop_map = new HashMap();
-            crop_map.put( "CropName", Crop_Name );
-            crop_map.put( "CropPrice", Crop_Price );
-            crop_map.put( "CropDistrict", Crop_District );
-            crop_map.put( "Current_Date", Crop_Date );
-            crop_map.put( "id", id );
-
-            PriceRef.updateChildren( crop_map ).addOnCompleteListener( new OnCompleteListener() {
-                @Override
-                public void onComplete(@NonNull Task task) {
-                    if (task.isSuccessful()) {
-
-                        Toast.makeText( AddMarketList.this, "your data add successfully", Toast.LENGTH_LONG ).show();
-                        loadingBar.dismiss();
-                        Clear();
-                        startActivity( new Intent( getApplicationContext(), AdminDashboard.class ) );
-                        finish();
-
-                    } else {
-                        String message = task.getException().getMessage();
-                        Toast.makeText( AddMarketList.this, "Error occured: " + message, Toast.LENGTH_SHORT ).show();
-                        loadingBar.dismiss();
-                    }
-
-                }
-            } );*/
-
 
         }
     }

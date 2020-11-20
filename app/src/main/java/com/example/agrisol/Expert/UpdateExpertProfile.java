@@ -37,6 +37,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -51,6 +52,7 @@ public class UpdateExpertProfile extends AppCompatActivity {
     String currentExpertID;
     private StorageReference  ExpertProfileImageRef;
     final static int Gallery_Pick =1;
+    private static final Pattern TEXT_PATTERN =Pattern.compile( "([ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz])*");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -251,10 +253,13 @@ public class UpdateExpertProfile extends AppCompatActivity {
         final String Expert_Country = ExpertCountry.getText().toString().trim();
         final String Expert_Experties = ExpertExperties.getText().toString().trim();
 
-
         if (TextUtils.isEmpty(Expert_Fullname)) {
             ExpertFullName.setError( "Enter Name" );
-        } else if (TextUtils.isEmpty(Expert_Email)) {
+        }
+        else if (!TEXT_PATTERN.matcher( Expert_Fullname ).matches()){
+            ExpertFullName.setError( "Enter Only Text" );
+        }
+        else if (TextUtils.isEmpty(Expert_Email)) {
             ExpertEmail.setError( "Enter Registered Email Address" );
         }
         else if(!Patterns.EMAIL_ADDRESS.matcher( Expert_Email ).matches()){
@@ -266,16 +271,39 @@ public class UpdateExpertProfile extends AppCompatActivity {
         else if (!Patterns.PHONE.matcher( Expert_MobileNo ).matches()){
             ExpertMobile.setError( "Enter Valid Mobile Number" );
         }
+        else if (!Patterns.PHONE.matcher( Expert_MobileNo ).matches()){
+
+            ExpertMobile.setError( "Enter Valid Mobile Number" );
+        }
         else if (TextUtils.isEmpty(Expert_Qualification)) {
             ExpertQualification.setError( "Enter Qualification" );
-        } else if (TextUtils.isEmpty(Expert_City)) {
+        }
+        else if (!TEXT_PATTERN.matcher( Expert_Qualification ).matches()){
+            ExpertQualification.setError( "Enter Only Text" );
+        }
+        else if (TextUtils.isEmpty(Expert_City)) {
             ExpertCity.setError( "Enter City Name" );
-        } else if (TextUtils.isEmpty(Expert_Province)) {
+        }
+        else if (!TEXT_PATTERN.matcher( Expert_City ).matches()){
+            ExpertCity.setError( "Enter Only Text" );
+        }
+        else if (TextUtils.isEmpty(Expert_Province)) {
             ExpertProvince.setError( "Enter Province" );
-        } else if (TextUtils.isEmpty(Expert_Country)) {
+        }
+        else if (!TEXT_PATTERN.matcher( Expert_Province ).matches()){
+            ExpertProvince.setError( "Enter Only Text" );
+        }
+        else if (TextUtils.isEmpty(Expert_Country)) {
             ExpertCountry.setError( "Enter Country" );
-        } else if (TextUtils.isEmpty(Expert_Experties)) {
+        }
+        else if (!TEXT_PATTERN.matcher( Expert_Country ).matches()){
+            ExpertCountry.setError( "Enter Only Text" );
+        }
+        else if (TextUtils.isEmpty(Expert_Experties)) {
             ExpertExperties.setError( "Enter Expertise" );
+        }
+        else if (!TEXT_PATTERN.matcher( Expert_Experties ).matches()){
+            ExpertExperties.setError( "Enter Only Text" );
         }
         else
         {

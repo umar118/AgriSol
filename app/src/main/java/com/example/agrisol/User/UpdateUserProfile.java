@@ -35,6 +35,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -49,6 +50,7 @@ public class UpdateUserProfile extends AppCompatActivity {
     String currentUserID;
     private StorageReference UserProfileImageRef;
     final static int Gallery_Pick =1;
+    private static final Pattern TEXT_PATTERN =Pattern.compile( "([ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz])*");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -280,6 +282,9 @@ UpdateUser();
         {
             FullName.setError( "Enter Name" );
         }
+        else if (!TEXT_PATTERN.matcher( User_Fullname ).matches()){
+            FullName.setError( "Enter Only Text" );
+        }
         else if(TextUtils.isEmpty(User_Email))
         {
             Email.setError( "Enter Registered Email Address" );
@@ -298,17 +303,29 @@ UpdateUser();
         {
             Occupation.setError( "Enter Occupation" );
         }
+        else if (!TEXT_PATTERN.matcher( User_Occupation ).matches()){
+            Occupation.setError( "Enter Only Text" );
+        }
         else if(TextUtils.isEmpty(User_City))
         {
             City.setError( "Enter City Name" );
+        }
+        else if (!TEXT_PATTERN.matcher( User_City ).matches()){
+            City.setError( "Enter Only Text" );
         }
         else if(TextUtils.isEmpty(User_Province))
         {
             Province.setError( "Enter Province Name" );
         }
+        else if (!TEXT_PATTERN.matcher( User_Province ).matches()){
+            Province.setError( "Enter Only Text" );
+        }
         else if(TextUtils.isEmpty(User_Country))
         {
             Country.setError( "Enter Country" );
+        }
+        else if (!TEXT_PATTERN.matcher( User_Country ).matches()){
+            Country.setError( "Enter Only Text" );
         }
 
         else

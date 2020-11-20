@@ -29,9 +29,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.ViewHolder> implements Filterable {
-
+    private static final Pattern TEXT_PATTERN =Pattern.compile( "([ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz])*");
+    private static final Pattern NUMBER_PATTERN =Pattern.compile( "([0123456789])*");
     Context context;
     ArrayList<Market> model;
     ArrayList<Market> modelFilter;
@@ -70,6 +72,16 @@ public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.ViewHolder> 
                 final EditText date = (EditText) dialog.findViewById( R.id.Update_current_date );
                 CardView update = (CardView) dialog.findViewById( R.id.update );
 
+                if (!TEXT_PATTERN.matcher( name.getText() ).matches()){
+                    name.setError( "Enter Only Text" );
+                }
+                else if (!TEXT_PATTERN.matcher( dis.getText() ).matches()){
+                    dis.setError( "Enter Only Text" );
+                }
+                else if (!NUMBER_PATTERN.matcher( price.getText() ).matches()){
+                    price.setError( "Enter Only Number" );
+                }
+
                 name.setText( model.get( holder.getAdapterPosition() ).getName() );
                 price.setText( model.get( holder.getAdapterPosition() ).getPrice() );
                 dis.setText( model.get( holder.getAdapterPosition() ).getDistrict() );
@@ -78,7 +90,6 @@ public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.ViewHolder> 
                 update.setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
 
                         {
                             final DatabaseReference PriceRef = FirebaseDatabase.getInstance().getReference().child( "Market_Rate" ).child( model.get( position ).getUid() );

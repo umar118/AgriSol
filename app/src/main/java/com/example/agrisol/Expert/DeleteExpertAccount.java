@@ -52,9 +52,9 @@ public class DeleteExpertAccount extends AppCompatActivity {
             }
         });
 
-        edtEmail = findViewById(R.id.edtEmail);
-        edtPassword = findViewById(R.id.edtPassword);
-        btnAuthenticate = findViewById(R.id.btnAuthenticate);
+        edtEmail = findViewById(R.id.Edit_ExpertEmail);
+        edtPassword = findViewById(R.id.Edit_ExpertPassword);
+        btnAuthenticate = findViewById(R.id.expert_delete_account);
 
         FirebaseUser currentUser_email = FirebaseAuth.getInstance().getCurrentUser();
         String userEmail = currentUser_email.getEmail();
